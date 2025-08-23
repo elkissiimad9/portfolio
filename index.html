@@ -2,15 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Freelance marketing à Rabat | SEO & Ads Maroc — El Kissi Imad</title>
   <meta name="description" content="Consultant SEO/Ads à Rabat. J’aide les PME marocaines à gagner des clients avec SEO Optimization, Meta/Google Ads et vidéos courtes. Audit gratuit 15 min.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
 
   <style>
     :root{
@@ -32,6 +30,7 @@
         var(--bg);
       line-height:1.45;
       overflow-x:hidden;
+      font-size: 16px; /* Taille de base pour mobile */
     }
 
     /* grille subtile */
@@ -60,16 +59,26 @@
       100%{background-position:6% 4%,-4% 5%,2% -3%}
     }
 
-    .container{ width:min(100% - 32px, var(--maxw)); margin-inline:auto; position:relative; z-index:1 }
+    .container{ 
+      width:min(100% - 32px, var(--maxw)); 
+      margin-inline:auto; 
+      position:relative; 
+      z-index:1;
+      padding: 0 16px; /* Ajout de padding pour mobile */
+    }
 
     .btn{
-      display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.2rem; border-radius:999px;
+      display:inline-flex; align-items:center; justify-content:center; gap:.6rem; padding:.9rem 1.2rem; border-radius:999px;
       border:1px solid rgba(255,255,255,.08);
       background:linear-gradient(180deg, rgba(255,122,0,.18), rgba(255,122,0,.12));
       color:var(--txt); text-decoration:none; font-weight:600; backdrop-filter: blur(6px);
       box-shadow: 0 8px 18px rgba(255,122,0,0.22), inset 0 0 0 1px rgba(255,255,255,.04);
       transition: transform .2s ease, box-shadow .2s ease;
       position:relative; overflow:hidden;
+      font-size: 0.95rem; /* Taille ajustée pour mobile */
+      text-align: center;
+      width: auto; /* S'assurer que les boutons ne débordent pas */
+      max-width: 100%;
     }
     .btn:hover{ transform: translateY(-2px); box-shadow: 0 14px 30px rgba(255,122,0,.25) }
     .btn--ghost{ background:transparent; border-color:rgba(255,255,255,.15) }
@@ -86,17 +95,38 @@
       transform-origin:0 0; transform:scaleX(var(--scroll));
       background:linear-gradient(90deg, var(--brand), var(--brand-2)); z-index:100
     }
-    .nav{ display:flex; align-items:center; justify-content:space-between; padding:.8rem 0 }
-    .brand{ display:flex; align-items:center; gap:.7rem; text-decoration:none; color:var(--txt); font-weight:800; letter-spacing:.3px }
+    .nav{ 
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between; 
+      padding:.8rem 0;
+      flex-wrap: wrap; /* Permettre l'adaptation sur mobile */
+    }
+    .brand{ 
+      display:flex; 
+      align-items:center; 
+      gap:.7rem; 
+      text-decoration:none; 
+      color:var(--txt); 
+      font-weight:800; 
+      letter-spacing:.3px;
+      font-size: 0.9rem; /* Taille ajustée pour mobile */
+    }
     .brand__logo{
       width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
       background:radial-gradient(circle at 30% 20%, #ffb347, #ff7a00 70%);
       box-shadow: inset 0 0 10px rgba(255,255,255,.15), 0 8px 24px rgba(255, 122, 0,.3)
     }
-    .nav__links{ display:flex; gap:1.1rem; align-items:center }
+    .nav__links{ 
+      display:flex; 
+      gap:1.1rem; 
+      align-items:center;
+      flex-wrap: wrap; /* Adaptation mobile */
+    }
     .nav__links a{
       position:relative; text-decoration:none; color:var(--muted);
-      font-weight:600; padding:.65rem .9rem; border-radius:999px; border:1px solid transparent
+      font-weight:600; padding:.65rem .9rem; border-radius:999px; border:1px solid transparent;
+      font-size: 0.9rem; /* Taille ajustée pour mobile */
     }
     .nav__links a:hover{ color:var(--txt); border-color:rgba(255,255,255,.08); background:rgba(255,255,255,.02) }
     .nav__links a::after{
@@ -114,18 +144,57 @@
     }
 
     /* Hero */
-    .hero{ position:relative; padding: min(8vh, 70px) 0 70px }
-    .hero .container{ display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center }
-    .eyebrow{ font-size:.8rem; letter-spacing:.15em; text-transform:uppercase; color:var(--brand); font-weight:800 }
-    h1{ font-size: clamp(2.2rem, 4.5vw + .5rem, 4rem); margin:.6rem 0 1rem; line-height:1.05 }
-    .lead{ color:var(--muted); font-size: clamp(1rem, 1.2vw + .4rem, 1.25rem) }
-    .hero__cta{ display:flex; gap:.8rem; margin-top:1.4rem; flex-wrap:wrap }
+    .hero{ 
+      position:relative; 
+      padding: min(8vh, 70px) 0 70px;
+      overflow: hidden; /* Éviter les débordements */
+    }
+    .hero .container{ 
+      display:grid; 
+      grid-template-columns:1fr; /* Par défaut 1 colonne pour mobile */
+      gap:40px; 
+      align-items:center 
+    }
+    .eyebrow{ 
+      font-size:.8rem; 
+      letter-spacing:.15em; 
+      text-transform:uppercase; 
+      color:var(--brand); 
+      font-weight:800;
+      text-align: center; /* Centrer sur mobile */
+    }
+    h1{ 
+      font-size: clamp(2rem, 4.5vw + .5rem, 3.5rem); /* Ajustement pour mobile */
+      margin:.6rem 0 1rem; 
+      line-height:1.05;
+      text-align: center; /* Centrer sur mobile */
+    }
+    .lead{ 
+      color:var(--muted); 
+      font-size: clamp(1rem, 1.2vw + .4rem, 1.25rem);
+      text-align: center; /* Centrer sur mobile */
+    }
+    .hero__cta{ 
+      display:flex; 
+      gap:.8rem; 
+      margin-top:1.4rem; 
+      flex-wrap:wrap;
+      justify-content: center; /* Centrer sur mobile */
+    }
 
     .hero__art{
-      position:relative; aspect-ratio:1/1; border-radius:var(--radius);
+      position:relative; 
+      aspect-ratio:1/1; 
+      border-radius:var(--radius);
       background: linear-gradient(145deg, rgba(255,122,0,.16), rgba(255,77,0,.12));
-      border:1px solid rgba(255,255,255,.08); box-shadow: var(--shadow);
-      overflow:hidden; transform-style:preserve-3d; perspective:1200px; will-change:transform;
+      border:1px solid rgba(255,255,255,.08); 
+      box-shadow: var(--shadow);
+      overflow:hidden; 
+      transform-style:preserve-3d; 
+      perspective:1200px; 
+      will-change:transform;
+      max-width: 100%; /* Éviter les débordements */
+      margin: 0 auto; /* Centrer sur mobile */
     }
     .hero__art::before{
       content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
@@ -134,29 +203,61 @@
       -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none; animation:spin 16s linear infinite
     }
     @keyframes spin{ to{ --spin:1turn } }
-    .hero__art img{ width:100%; height:100%; object-fit:contain; display:block; background:#000 }
+    .hero__art img{ 
+      width:100%; 
+      height:100%; 
+      object-fit:cover; /* Changé de contain à cover pour mieux s'adapter */
+      display:block; 
+      background:#000 
+    }
     .hero__badge{
       position:absolute; top:20px; left:20px; padding:.5rem .8rem; border-radius:12px;
       background:rgba(0,0,0,.65); color:#fff; border:1px solid rgba(255,255,255,.12);
       font-weight:700; letter-spacing:.02em; z-index:10; backdrop-filter: blur(6px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25); animation:bob 3.8s ease-in-out infinite
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25); animation:bob 3.8s ease-in-out infinite;
+      font-size: 0.8rem; /* Taille ajustée pour mobile */
     }
     @keyframes bob{ 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-4px)} }
     .hero__blob{ position:absolute; inset:auto -10% -15% auto; width: 70%; aspect-ratio:1; background: radial-gradient(circle at 40% 40%, rgba(255,160,64,1), rgba(255,160,64,0) 55%); filter: blur(30px); opacity:.35 }
     .hero__grid{ position:absolute; inset:0; background: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 22px 22px; opacity:.25; mix-blend-mode: overlay; }
 
     /* Sections */
-    section{ padding:70px 0 }
-    .section__head{ display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:26px }
-    .section__title{ font-size: clamp(1.4rem, 2.2vw + .5rem, 2.2rem) }
-    .section__desc{ color:var(--muted) }
+    section{ 
+      padding:50px 0; /* Réduction du padding pour mobile */
+    }
+    .section__head{ 
+      display:flex; 
+      flex-direction: column; /* Colonne pour mobile */
+      align-items:center; /* Centrer pour mobile */
+      justify-content:space-between; 
+      gap:20px; 
+      margin-bottom:26px;
+      text-align: center; /* Centrer pour mobile */
+    }
+    .section__title{ 
+      font-size: clamp(1.4rem, 2.2vw + .5rem, 2.2rem);
+      text-align: center; /* Centrer pour mobile */
+    }
+    .section__desc{ 
+      color:var(--muted);
+      text-align: center; /* Centrer pour mobile */
+    }
 
     /* Cards & grids */
     .grid{ display:grid; gap:18px }
-    .grid--3{ grid-template-columns: repeat(3, 1fr) }
-    .grid--2{ grid-template-columns: repeat(2, 1fr) }
+    .grid--3{ grid-template-columns: 1fr; /* 1 colonne par défaut pour mobile */ }
+    .grid--2{ grid-template-columns: 1fr; /* 1 colonne par défaut pour mobile */ }
 
-    .card{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow); position:relative; overflow:hidden }
+    .card{ 
+      background:var(--card); 
+      border:1px solid rgba(255,255,255,.06); 
+      border-radius:var(--radius); 
+      padding:22px; 
+      box-shadow:var(--shadow); 
+      position:relative; 
+      overflow:hidden;
+      max-width: 100%; /* Éviter les débordements */
+    }
     .card:hover{ border-color: rgba(255,122,0,.30) }
     .card__icon{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background: radial-gradient(circle at 30% 20%, #ffb347, #ff7a00 80%); box-shadow: inset 0 0 10px rgba(255,255,255,.14) }
     .card h3{ margin:.8rem 0 .4rem }
@@ -169,10 +270,23 @@
     .card:hover::after, .work__item:hover::after{ opacity:1 }
 
     /* Projects */
-    .work{ display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; align-items:stretch }
+    .work{ 
+      display:grid; 
+      grid-template-columns: 1fr; /* 1 colonne pour mobile */
+      gap:18px; 
+      align-items:stretch 
+    }
     .work__cover{
-      border-radius:var(--radius); background:linear-gradient(145deg, rgba(255,122,0,.18), rgba(255,122,0,.10));
-      border:1px solid rgba(255,255,255,.08); overflow:hidden; position:relative; height:100%; align-self:stretch; display:grid; place-items:stretch; will-change: transform;
+      border-radius:var(--radius); 
+      background:linear-gradient(145deg, rgba(255,122,0,.18), rgba(255,122,0,.10));
+      border:1px solid rgba(255,255,255,.08); 
+      overflow:hidden; 
+      position:relative; 
+      height:auto; /* Hauteur automatique pour mobile */
+      min-height: 250px; /* Hauteur minimale pour mobile */
+      display:grid; 
+      place-items:stretch; 
+      will-change: transform;
     }
     .work__cover::before{
       content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
@@ -180,45 +294,114 @@
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none; animation:spin 18s linear infinite
     }
-    .work__cover img{ width:100%; height:100%; object-fit:contain; display:block; background:#0b0f14 }
+    .work__cover img{ 
+      width:100%; 
+      height:100%; 
+      object-fit:cover; /* Changé de contain à cover */
+      display:block; 
+      background:#0b0f14 
+    }
     .cover__caption{
       position:absolute; left:12px; right:12px; bottom:12px; background: rgba(0,0,0,.45);
       -webkit-backdrop-filter: blur(10px) saturate(120%); backdrop-filter: blur(10px) saturate(120%);
       border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:.9rem 1rem; color:#fff; text-align:left; line-height:1.45; font-size:.95rem; text-shadow: 0 1px 1px rgba(0,0,0,.35);
     }
     .work__list{ display:grid; gap:18px }
-    .work__item{ display:flex; gap:14px; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.03); position:relative; overflow:hidden }
-    .work__thumb{ width:94px; height:72px; border-radius:10px; background:linear-gradient(145deg, rgba(255,122,0,.22), rgba(255,122,0,.12)); border:1px solid rgba(255,255,255,.08); overflow:hidden }
+    .work__item{ 
+      display:flex; 
+      flex-direction: column; /* Colonne pour mobile */
+      gap:14px; 
+      padding:14px; 
+      border-radius:14px; 
+      border:1px solid rgba(255,255,255,.06); 
+      background:rgba(255,255,255,.03); 
+      position:relative; 
+      overflow:hidden 
+    }
+    .work__thumb{ 
+      width:100%; /* Pleine largeur pour mobile */
+      height:150px; /* Hauteur fixe pour mobile */
+      border-radius:10px; 
+      background:linear-gradient(145deg, rgba(255,122,0,.22), rgba(255,122,0,.12)); 
+      border:1px solid rgba(255,255,255,.08); 
+      overflow:hidden 
+    }
     .work__meta{ flex:1 }
     .work__meta h4{ margin:.2rem 0 .3rem }
     .work__meta p{ color:var(--muted); font-size:.95rem }
 
     /* Testimonials */
-    .quote{ display:grid; gap:20px; grid-template-columns: .8fr 1.2fr }
-    .quote__card{ background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); padding:22px; border:1px solid rgba(255,255,255,.08); border-radius:var(--radius) }
+    .quote{ 
+      display:grid; 
+      gap:20px; 
+      grid-template-columns: 1fr; /* 1 colonne pour mobile */
+    }
+    .quote__card{ 
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); 
+      padding:22px; 
+      border:1px solid rgba(255,255,255,.08); 
+      border-radius:var(--radius) 
+    }
     blockquote{ margin:0; font-size:1.05rem }
     .stars{ color:#ffd76b; letter-spacing:.08em; font-size:1.1rem }
     .person{ display:flex; align-items:center; gap:12px; margin-top:10px }
     .avatar{ width:42px; height:42px; border-radius:50%; background:linear-gradient(145deg, rgba(255,122,0,.35), rgba(255,77,0,.25)); border:1px solid rgba(255,255,255,.1) }
 
     /* Contact */
-    .contact{ display:grid; grid-template-columns: 1fr 1fr; gap:18px }
-    .contact form{ background:var(--card); border:1px solid rgba(255,255,255,.06); padding:20px; border-radius:var(--radius); box-shadow:var(--shadow) }
+    .contact{ 
+      display:grid; 
+      grid-template-columns: 1fr; /* 1 colonne pour mobile */
+      gap:18px 
+    }
+    .contact form{ 
+      background:var(--card); 
+      border:1px solid rgba(255,255,255,.06); 
+      padding:20px; 
+      border-radius:var(--radius); 
+      box-shadow:var(--shadow) 
+    }
     .field{ display:grid; gap:8px; margin-bottom:12px }
     label{ color:var(--muted); font-size:.95rem }
-    input,textarea{ background:#0c1117; border:1px solid rgba(255,255,255,.08); color:var(--txt); padding:12px 14px; border-radius:12px; outline:none; font:inherit }
+    input,textarea{ 
+      background:#0c1117; 
+      border:1px solid rgba(255,255,255,.08); 
+      color:var(--txt); 
+      padding:12px 14px; 
+      border-radius:12px; 
+      outline:none; 
+      font:inherit;
+      width: 100%; /* Pleine largeur pour mobile */
+      box-sizing: border-box; /* Inclure le padding dans la largeur */
+    }
     textarea{ min-height:120px; resize:vertical }
 
     /* Footer */
-    footer{ border-top:1px solid rgba(255,255,255,.06); padding:22px 0; color:var(--muted) }
-    .foot{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap }
+    footer{ 
+      border-top:1px solid rgba(255,255,255,.06); 
+      padding:22px 0; 
+      color:var(--muted);
+      text-align: center; /* Centrer pour mobile */
+    }
+    .foot{ 
+      display:flex; 
+      flex-direction: column; /* Colonne pour mobile */
+      align-items:center; /* Centrer pour mobile */
+      justify-content:space-between; 
+      gap:16px; 
+      flex-wrap:wrap 
+    }
 
     /* Reveal */
     [data-animate]{ opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease }
     [data-animate].visible{ opacity:1; transform:none }
 
     /* Keyword cloud */
-    .keyword-cloud{ position:relative; margin:18px auto 0; min-height:160px; }
+    .keyword-cloud{ 
+      position:relative; 
+      margin:18px auto 0; 
+      min-height:160px; 
+      display: none; /* Caché par défaut sur mobile */
+    }
     .keyword-cloud__wrap{ position:relative; height:160px; pointer-events:none; filter: drop-shadow(0 8px 18px rgba(0,0,0,.35)); }
     .keyword{
       position:absolute; padding:.55rem .95rem; border-radius:999px; font-weight:700; white-space:nowrap; color:#fff; opacity:.95;
@@ -228,15 +411,38 @@
     @keyframes float{ to{ transform: translate(var(--tx,22px), var(--ty,-16px)) scale(var(--s,1)); } }
 
     /* ---------- Responsive ---------- */
-    @media (max-width:960px){
-      .hero .container{ grid-template-columns:1fr }
-      .grid--3{ grid-template-columns:1fr 1fr }
+    /* Tablettes */
+    @media (min-width: 768px) {
+      .hero .container{ grid-template-columns:1.2fr .8fr; }
+      .grid--3{ grid-template-columns:1fr 1fr; }
+      .grid--2{ grid-template-columns:1fr 1fr; }
+      .work{ grid-template-columns: 1.2fr .8fr; }
+      .work__item{ flex-direction: row; } /* Repasser en ligne sur tablette */
+      .quote{ grid-template-columns: 1fr 1fr; }
+      .contact{ grid-template-columns: 1fr 1fr; }
+      .section__head{ 
+        flex-direction: row; /* Repasser en ligne sur tablette */
+        align-items: end;
+        text-align: left; /* Alignement à gauche sur tablette+ */
+      }
+      .section__title,
+      .section__desc,
+      .eyebrow,
+      h1,
+      .lead {
+        text-align: left; /* Alignement à gauche sur tablette+ */
+      }
+      .hero__cta{ justify-content: flex-start; } /* Alignement à gauche sur tablette+ */
+      .foot{ flex-direction: row; } /* Repasser en ligne sur tablette */
+      .keyword-cloud{ display: block; } /* Afficher le nuage de mots sur tablette+ */
     }
-    @media (max-width:700px){
-      .grid--3,.grid--2{ grid-template-columns:1fr }
-      .keyword-cloud{ display:none }
-      h1{ font-size: clamp(1.9rem, 6vw + .5rem, 3rem) }
+
+    /* Desktop */
+    @media (min-width: 1024px) {
+      .grid--3{ grid-template-columns: repeat(3, 1fr); }
+      .quote{ grid-template-columns: .8fr 1.2fr; }
     }
+
     /* Nav mobile (drawer) */
     @media (max-width:940px){
       .menu-toggle{ display:inline-flex }
@@ -408,8 +614,8 @@
             </article>
 
             <article class="work__item" data-animate>
-              <div class="work__thumb">
-                <img src="images/THEgate.jpg" alt="The Gate Morocco" style="width:100%;height:100%;object-fit:cover"/>
+              <div class="work__thumb"> 
+                                <img src="images/THEgate.jpg" alt="The Gate Morocco" style="width:100%;height:100%;object-fit:cover"/>
               </div>
               <div class="work__meta">
                 <h4>The Gate Morocco</h4>
@@ -426,31 +632,10 @@
                 <p>Spécialiste marketing digital : stratégie, contenu, design & ads pour booster la croissance.</p>
               </div>
             </article>
-          </div>
-        </div>
-      </div>
+          </div><!-- /.work__list -->
+        </div><!-- /.work -->
+      </div><!-- /.container -->
     </section>
-
-    <!-- KEYWORD CLOUD (marketing keywords flottants) -->
-    <div class="container keyword-cloud" aria-hidden="true">
-      <div class="keyword-cloud__wrap">
-        <span class="keyword" style="left:3%; top:12%; --tx:26px; --ty:-10px; --s:1; --t:11s;">SEO/SEA</span>
-        <span class="keyword" style="left:18%; top:4%; --tx:-22px; --ty:12px; --s:1.05; --t:12s;">Google Ads</span>
-        <span class="keyword" style="left:34%; top:22%; --tx:18px; --ty:-14px; --s:.98; --t:13s;">Meta Ads</span>
-        <span class="keyword" style="left:52%; top:8%; --tx:-20px; --ty:10px; --s:1.03; --t:10s;">A/B Testing</span>
-        <span class="keyword" style="left:70%; top:18%; --tx:16px; --ty:-18px; --s:1; --t:12.5s;">GA4</span>
-        <span class="keyword" style="left:84%; top:6%; --tx:-18px; --ty:12px; --s:1; --t:11.2s;">Analytics</span>
-        <span class="keyword" style="left:10%; top:56%; --tx:22px; --ty:-12px; --s:1; --t:12.2s;">Landing Pages</span>
-        <span class="keyword" style="left:30%; top:48%; --tx:-26px; --ty:14px; --s:.95; --t:13.4s;">CRO</span>
-        <span class="keyword" style="left:46%; top:58%; --tx:20px; --ty:-16px; --s:1; --t:12.8s;">Copywriting</span>
-        <span class="keyword" style="left:63%; top:48%; --tx:-22px; --ty:12px; --s:1; --t:12.6s;">Retargeting</span>
-        <span class="keyword" style="left:80%; top:56%; --tx:18px; --ty:-14px; --s:1; --t:11.6s;">Local Pack</span>
-        <span class="keyword" style="left:6%; top:86%; --tx:20px; --ty:-16px; --s:1; --t:12.6s;">Reels/TikTok</span>
-        <span class="keyword" style="left:28%; top:78%; --tx:-24px; --ty:12px; --s:1; --t:11.8s;">Emailing</span>
-        <span class="keyword" style="left:54%; top:84%; --tx:20px; --ty:-18px; --s:.98; --t:12.2s;">UX/UI</span>
-        <span class="keyword" style="left:76%; top:78%; --tx:-22px; --ty:12px; --s:1.02; --t:12.9s;">Branding</span>
-      </div>
-    </div>
 
     <!-- TEMOIGNAGES -->
     <section id="temoignages">
@@ -466,28 +651,40 @@
           <div class="quote__card" data-animate>
             <div class="stars">★★★★★</div>
             <blockquote>« KPIs en hausse et image pro. On a gagné en clarté et en conversion. »</blockquote>
-            <div class="person"><div class="avatar"></div><div><strong>CEO</strong><div class="muted">AIMPACTIFY Maroc</div></div></div>
+            <div class="person">
+              <div class="avatar"></div>
+              <div><strong>CEO</strong><div class="muted">AIMPACTIFY Maroc</div></div>
+            </div>
           </div>
 
           <div class="quote__card" data-animate>
             <div class="stars">★★★★★</div>
             <blockquote>« Du local au viral en quelques semaines. Design propre, messages justes. »</blockquote>
-            <div class="person"><div class="avatar"></div><div><strong>CEO</strong><div class="muted">Nsayblik</div></div></div>
+            <div class="person">
+              <div class="avatar"></div>
+              <div><strong>CEO</strong><div class="muted">Nsayblik</div></div>
+            </div>
           </div>
 
           <div class="quote__card" data-animate>
             <div class="stars">★★★★★</div>
             <blockquote>« Ambiance premium respectée, parcours fluide. Les clients le ressentent. »</blockquote>
-            <div class="person"><div class="avatar"></div><div><strong>CEO</strong><div class="muted">The Gate Morocco</div></div></div>
+            <div class="person">
+              <div class="avatar"></div>
+              <div><strong>CEO</strong><div class="muted">The Gate Morocco</div></div>
+            </div>
           </div>
 
           <div class="quote__card" data-animate>
             <div class="stars">★★★★★</div>
             <blockquote>« Stratégie, contenu, ads : on booste vraiment les résultats. »</blockquote>
-            <div class="person"><div class="avatar"></div><div><strong>Founder & CEO</strong><div class="muted">Linkopus Consulting</div></div></div>
+            <div class="person">
+              <div class="avatar"></div>
+              <div><strong>Founder & CEO</strong><div class="muted">Linkopus Consulting</div></div>
+            </div>
           </div>
-        </div>
-      </div>
+        </div><!-- /.quote -->
+      </div><!-- /.container -->
     </section>
 
     <!-- CONTACT -->
@@ -503,11 +700,23 @@
         <div class="contact">
           <form name="contact" netlify>
             <input type="hidden" name="form-name" value="contact" />
-            <div class="field"><label for="name">Nom</label><input id="name" name="name" placeholder="Votre nom" required /></div>
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" value="elkissiimad9@gmail.com" required /></div>
-            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Parlez-moi de votre projet"></textarea></div>
+            <div class="field">
+              <label for="name">Nom</label>
+              <input id="name" name="name" placeholder="Votre nom" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" value="elkissiimad9@gmail.com" required />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Parlez-moi de votre projet"></textarea>
+            </div>
             <button class="btn" type="submit">Envoyer</button>
-            <p style="color:var(--muted); font-size:.92rem; margin-top:10px">✉️ Ou écrivez directement : <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a></p>
+            <p style="color:var(--muted); font-size:.92rem; margin-top:10px">
+              ✉️ Ou écrivez directement :
+              <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a>
+            </p>
           </form>
 
           <div class="card" data-animate>
@@ -523,8 +732,8 @@
               <a class="btn btn--ghost" href="#projets">Voir d'autres projets</a>
             </div>
           </div>
-        </div>
-      </div>
+        </div><!-- /.contact -->
+      </div><!-- /.container -->
     </section>
   </main>
 
@@ -554,7 +763,7 @@
       });
     });
 
-    // Barre de progression
+    // Barre de progression (header)
     const de=document.documentElement;
     function onScroll(){
       const h=de.scrollHeight - de.clientHeight;
@@ -563,7 +772,7 @@
     }
     document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
-    // Tilt 3D: seulement quand on a une souris (desktop)
+    // Tilt 3D: seulement sur pointeur fin (desktop)
     function attachTilt(el){
       let rAF; const max=6;
       function move(e){
@@ -583,7 +792,7 @@
       document.querySelectorAll('[data-tilt]').forEach(attachTilt);
     }
 
-    // Halo glossy
+    // Halo glossy (cards & items)
     document.querySelectorAll('.card, .work__item').forEach(el=>{
       el.addEventListener('mousemove', e=>{
         const r=el.getBoundingClientRect();
