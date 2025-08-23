@@ -614,8 +614,8 @@
             </article>
 
             <article class="work__item" data-animate>
-              <div class="work__thumb"> 
-                                <img src="images/THEgate.jpg" alt="The Gate Morocco" style="width:100%;height:100%;object-fit:cover"/>
+              <div class="work__thumb">
+                <img src="images/THEgate.jpg" alt="The Gate Morocco" style="width:100%;height:100%;object-fit:cover"/>
               </div>
               <div class="work__meta">
                 <h4>The Gate Morocco</h4>
@@ -632,10 +632,31 @@
                 <p>Spécialiste marketing digital : stratégie, contenu, design & ads pour booster la croissance.</p>
               </div>
             </article>
-          </div><!-- /.work__list -->
-        </div><!-- /.work -->
-      </div><!-- /.container -->
+          </div>
+        </div>
+      </div>
     </section>
+
+    <!-- KEYWORD CLOUD (marketing keywords flottants) -->
+    <div class="container keyword-cloud" aria-hidden="true">
+      <div class="keyword-cloud__wrap">
+        <span class="keyword" style="left:3%; top:12%; --tx:26px; --ty:-10px; --s:1; --t:11s;">SEO/SEA</span>
+        <span class="keyword" style="left:18%; top:4%; --tx:-22px; --ty:12px; --s:1.05; --t:12s;">Google Ads</span>
+        <span class="keyword" style="left:34%; top:22%; --tx:18px; --ty:-14px; --s:.98; --t:13s;">Meta Ads</span>
+        <span class="keyword" style="left:52%; top:8%; --tx:-20px; --ty:10px; --s:1.03; --t:10s;">A/B Testing</span>
+        <span class="keyword" style="left:70%; top:18%; --tx:16px; --ty:-18px; --s:1; --t:12.5s;">GA4</span>
+        <span class="keyword" style="left:84%; top:6%; --tx:-18px; --ty:12px; --s:1; --t:11.2s;">Analytics</span>
+        <span class="keyword" style="left:10%; top:56%; --tx:22px; --ty:-12px; --s:1; --t:12.2s;">Landing Pages</span>
+        <span class="keyword" style="left:30%; top:48%; --tx:-26px; --ty:14px; --s:.95; --t:13.4s;">CRO</span>
+        <span class="keyword" style="left:46%; top:58%; --tx:20px; --ty:-16px; --s:1; --t:12.8s;">Copywriting</span>
+        <span class="keyword" style="left:63%; top:48%; --tx:-22px; --ty:12px; --s:1; --t:12.6s;">Retargeting</span>
+        <span class="keyword" style="left:80%; top:56%; --tx:18px; --ty:-14px; --s:1; --t:11.6s;">Local Pack</span>
+        <span class="keyword" style="left:6%; top:86%; --tx:20px; --ty:-16px; --s:1; --t:12.6s;">Reels/TikTok</span>
+        <span class="keyword" style="left:28%; top:78%; --tx:-24px; --ty:12px; --s:1; --t:11.8s;">Emailing</span>
+        <span class="keyword" style="left:54%; top:84%; --tx:20px; --ty:-18px; --s:.98; --t:12.2s;">UX/UI</span>
+        <span class="keyword" style="left:76%; top:78%; --tx:-22px; --ty:12px; --s:1.02; --t:12.9s;">Branding</span>
+      </div>
+    </div>
 
     <!-- TEMOIGNAGES -->
     <section id="temoignages">
@@ -651,40 +672,28 @@
           <div class="quote__card" data-animate>
             <div class="stars">★★★★★</div>
             <blockquote>« KPIs en hausse et image pro. On a gagné en clarté et en conversion. »</blockquote>
-            <div class="person">
-              <div class="avatar"></div>
-              <div><strong>CEO</strong><div class="muted">AIMPACTIFY Maroc</div></div>
-            </div>
+            <div class="person"><div class="avatar"></div><div><strong>CEO</strong><div class="muted">AIMPACTIFY Maroc</div></div></div>
           </div>
 
           <div class="quote__card" data-animate>
             <div class="stars">★★★★★</div>
             <blockquote>« Du local au viral en quelques semaines. Design propre, messages justes. »</blockquote>
-            <div class="person">
-              <div class="avatar"></div>
-              <div><strong>CEO</strong><div class="muted">Nsayblik</div></div>
-            </div>
+            <div class="person"><div class="avatar"></div><div><strong>CEO</strong><div class="muted">Nsayblik</div></div></div>
           </div>
 
           <div class="quote__card" data-animate>
             <div class="stars">★★★★★</div>
             <blockquote>« Ambiance premium respectée, parcours fluide. Les clients le ressentent. »</blockquote>
-            <div class="person">
-              <div class="avatar"></div>
-              <div><strong>CEO</strong><div class="muted">The Gate Morocco</div></div>
-            </div>
+            <div class="person"><div class="avatar"></div><div><strong>CEO</strong><div class="muted">The Gate Morocco</div></div></div>
           </div>
 
           <div class="quote__card" data-animate>
             <div class="stars">★★★★★</div>
             <blockquote>« Stratégie, contenu, ads : on booste vraiment les résultats. »</blockquote>
-            <div class="person">
-              <div class="avatar"></div>
-              <div><strong>Founder & CEO</strong><div class="muted">Linkopus Consulting</div></div>
-            </div>
+            <div class="person"><div class="avatar"></div><div><strong>Founder & CEO</strong><div class="muted">Linkopus Consulting</div></div></div>
           </div>
-        </div><!-- /.quote -->
-      </div><!-- /.container -->
+        </div>
+      </div>
     </section>
 
     <!-- CONTACT -->
@@ -700,23 +709,11 @@
         <div class="contact">
           <form name="contact" netlify>
             <input type="hidden" name="form-name" value="contact" />
-            <div class="field">
-              <label for="name">Nom</label>
-              <input id="name" name="name" placeholder="Votre nom" required />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" value="elkissiimad9@gmail.com" required />
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Parlez-moi de votre projet"></textarea>
-            </div>
+            <div class="field"><label for="name">Nom</label><input id="name" name="name" placeholder="Votre nom" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" value="elkissiimad9@gmail.com" required /></div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Parlez-moi de votre projet"></textarea></div>
             <button class="btn" type="submit">Envoyer</button>
-            <p style="color:var(--muted); font-size:.92rem; margin-top:10px">
-              ✉️ Ou écrivez directement :
-              <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a>
-            </p>
+            <p style="color:var(--muted); font-size:.92rem; margin-top:10px">✉️ Ou écrivez directement : <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a></p>
           </form>
 
           <div class="card" data-animate>
@@ -732,8 +729,8 @@
               <a class="btn btn--ghost" href="#projets">Voir d'autres projets</a>
             </div>
           </div>
-        </div><!-- /.contact -->
-      </div><!-- /.container -->
+        </div>
+      </div>
     </section>
   </main>
 
@@ -763,7 +760,7 @@
       });
     });
 
-    // Barre de progression (header)
+    // Barre de progression
     const de=document.documentElement;
     function onScroll(){
       const h=de.scrollHeight - de.clientHeight;
@@ -772,7 +769,7 @@
     }
     document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
-    // Tilt 3D: seulement sur pointeur fin (desktop)
+    // Tilt 3D: seulement quand on a une souris (desktop)
     function attachTilt(el){
       let rAF; const max=6;
       function move(e){
@@ -792,7 +789,7 @@
       document.querySelectorAll('[data-tilt]').forEach(attachTilt);
     }
 
-    // Halo glossy (cards & items)
+    // Halo glossy
     document.querySelectorAll('.card, .work__item').forEach(el=>{
       el.addEventListener('mousemove', e=>{
         const r=el.getBoundingClientRect();
@@ -828,7 +825,7 @@
     "@type": "ProfessionalService",
     "name": "El Kissi Imad",
     "areaServed": ["Rabat","Salé","Témara","Morocco"],
-    "url": "https://ton-domaine.ma",
+    "url": "https://elkissiimad9.github.io/portfolio/",
     "serviceType": ["SEO","Google Ads","Meta Ads","Video Content"],
     "inLanguage": ["fr","ar"],
     "address": { "@type": "PostalAddress", "addressCountry": "MA", "addressLocality": "Rabat" }
