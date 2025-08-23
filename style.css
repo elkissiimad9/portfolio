@@ -132,3 +132,59 @@ h1{ font-size: clamp(2.2rem, 4.5vw + .5rem, 4rem); margin:.6rem 0 1rem; line-hei
 /* Sections */
 section{ padding:70px 0 }
 .section__head{ display:flex; alig
+/* ===== MOBILE FIX PACK ===== */
+
+/* Évite les débordements de texte */
+.section__title,
+.section__desc,
+.work__meta p,
+blockquote { overflow-wrap: anywhere; hyphens: auto; }
+
+/* Thumbs des projets : bien remplir le cadre */
+.work__thumb img { width:100%; height:100%; object-fit: cover; }
+
+/* <= 960px : 1 colonne pour Projets + Avis */
+@media (max-width: 960px){
+  .work { grid-template-columns: 1fr !important; }
+  .quote { grid-template-columns: 1fr !important; }
+}
+
+/* <= 768px : mode téléphone */
+@media (max-width: 768px){
+  /* Grilles */
+  .grid--3, .grid--2 { grid-template-columns: 1fr !important; }
+  .contact { grid-template-columns: 1fr !important; }
+  .hero .container { grid-template-columns: 1fr !important; }
+
+  /* Cover du projet : plus de bande noire */
+  .work__cover {
+    height: auto !important;           /* ne pas hériter d'une hauteur étirée */
+    aspect-ratio: 16 / 10;              /* ratio stable sur mobile */
+  }
+  .work__cover img {
+    width: 100%; height: 100%;
+    object-fit: cover !important;       /* on remplit, quitte à rogner un peu */
+    background: #0b0f14;
+  }
+
+  /* Menu burger visible + drawer fiable même si ancien CSS traîne */
+  .menu-toggle { display: inline-flex !important; }
+  .nav__links {
+    position: fixed; top: 64px; right: 12px; left: 12px;
+    flex-direction: column; gap: .25rem;
+    background: rgba(11,15,20,.96);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px; padding: .6rem; box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    opacity: 0; transform: translateY(-8px); pointer-events: none;
+    transition: opacity .2s, transform .2s;
+  }
+  .nav__links.show { opacity: 1; transform: none; pointer-events: auto; }
+
+  /* CTA pleine largeur si espace trop étroit */
+  .btn { min-width: 0; width: 100%; justify-content: center; }
+}
+
+/* <= 480px : petits téléphones */
+@media (max-width: 480px){
+  .nav { padding: .6rem 0; }
+}
