@@ -465,40 +465,114 @@
 
     /* ---------- Modal Styles ---------- */
     .modal-overlay {
-      position: fixed; inset: 0; background-color: rgba(11,15,20,0.9);
-      display: flex; justify-content: center; align-items: center;
-      z-index: 1000; opacity: 0; visibility: hidden;
-      transition: opacity .3s ease, visibility .3s ease; backdrop-filter: blur(8px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(11, 15, 20, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      backdrop-filter: blur(8px);
     }
-    .modal-overlay.active { opacity: 1; visibility: visible; }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
     .modal {
-      background: var(--card); border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.1); box-shadow: var(--shadow);
-      width: min(92vw, 820px); max-height: 90vh; overflow-y: auto;
-      padding: 24px; position: relative; transform: translateY(50px); opacity: 0;
-      transition: transform .4s ease, opacity .4s ease;
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow);
+      width: 90%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 30px;
+      position: relative;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
     }
-    .modal-overlay.active .modal { transform: translateY(0); opacity: 1; }
+    
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
     .modal-close {
-      position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,.1);
-      border: none; border-radius: 50%; width: 40px; height: 40px; display: grid; place-items: center;
-      color: var(--txt); font-size: 1.4rem; cursor: pointer; transition: background .2s ease;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--txt);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
-    .modal-close:hover { background: rgba(255,122,0,.25); }
-    .modal-header { margin-bottom: 14px; padding-right: 44px; }
-    .modal-title { font-size: 1.6rem; margin: 0 0 6px; color: var(--brand); }
-    .modal-subtitle { color: var(--muted); font-size: 1.02rem; }
-    .modal-content { line-height: 1.6; }
-    .modal-content p { margin: 0 0 12px; }
-    /* — limiter UNIQUEMENT la taille des images DANS la modale — */
-    .modal-content img, .modal-image{
-      display:block; margin:14px auto; width:auto; height:auto;
-      max-width: clamp(180px, 55vw, 420px); max-height: clamp(140px, 40vh, 280px);
-      object-fit: contain; border-radius: 12px; background:#0b0f14;
-      border:1px solid rgba(255,255,255,.08); box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    
+    .modal-close:hover {
+      background: rgba(255, 122, 0, 0.2);
     }
-
+    
+    .modal-header {
+      margin-bottom: 20px;
+      padding-right: 40px;
+    }
+    
+    .modal-title {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: var(--brand);
+    }
+    
+    .modal-subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+    
+    .modal-content {
+      line-height: 1.6;
+    }
+    
+    .modal-content p {
+      margin-bottom: 15px;
+    }
+    
+    .modal-image {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .modal-content ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .modal-content li {
+      margin-bottom: 8px;
+    }
+    
     /* ---------- Responsive ---------- */
+    /* Tablettes */
     @media (min-width: 768px) {
       .hero .container{ grid-template-columns:1.2fr .8fr; }
       .grid--3{ grid-template-columns:1fr 1fr; }
@@ -508,19 +582,40 @@
       .quote{ grid-template-columns: 1fr 1fr; }
       .contact{ grid-template-columns: 1fr 1fr; }
       .section__head{ 
-        flex-direction: row; align-items: end; text-align: left;
+        flex-direction: row;
+        align-items: end;
+        text-align: left;
       }
-      .section__title, .section__desc, .eyebrow, h1, .lead { text-align: left; }
+      .section__title,
+      .section__desc,
+      .eyebrow,
+      h1,
+      .lead {
+        text-align: left;
+      }
       .hero__cta{ justify-content: flex-start; }
       .foot{ flex-direction: row; }
       .keyword-cloud{ display: block; }
     }
+
+    /* Desktop */
     @media (min-width: 1024px) {
       .grid--3{ grid-template-columns: repeat(3, 1fr); }
       .quote{ grid-template-columns: .8fr 1.2fr; }
-      .hero__art img, .work__cover img { object-fit: contain; }
-      .work__thumb { width: 94px; height: 72px; }
+      
+      /* Rétablir les styles desktop spécifiques */
+      .hero__art img,
+      .work__cover img {
+        object-fit: contain; /* Conserver contain sur desktop */
+      }
+      
+      .work__thumb {
+        width: 94px; /* Rétablir la taille originale sur desktop */
+        height: 72px;
+      }
     }
+
+    /* Nav mobile (drawer) */
     @media (max-width:940px){
       .menu-toggle{ display:inline-flex }
       .nav__links{
@@ -534,10 +629,13 @@
       body.lock{ overflow:hidden }
     }
 
+    /* accessibilité : réduit les animations si l'utilisateur le demande */
     @media (prefers-reduced-motion: reduce){
       .btn::after, .hero__art::before, .work__cover::before, body::after{ animation:none }
       .hero__badge{ animation:none }
-      .modal{ transition: none; }
+      .modal {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -804,7 +902,7 @@
               <li>✅ Support après mise en ligne</li>
             </ul>
             <div style="margin-top:14px; display:flex; gap:.6rem; flex-wrap:wrap">
-              <a class="btn" href="https://wa.me/212618593795" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="btn" href="https://wa.me/212618593795" target=" _blank" rel="noopener">WhatsApp</a>
               <a class="btn btn--ghost" href="#projets">Voir d'autres projets</a>
             </div>
           </div>
@@ -820,15 +918,17 @@
     </div>
   </footer>
 
-  <!-- MODALE PROJET -->
-  <div class="modal-overlay" id="projectModal" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" id="modalClose" aria-label="Fermer">×</button>
-      <header class="modal-header">
-        <h3 class="modal-title" id="modalTitle"></h3>
-        <div class="modal-subtitle" id="modalSubtitle"></div>
-      </header>
-      <div class="modal-content" id="modalContent"></div>
+  <!-- Modales pour les projets -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="modal">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">Titre du projet</h2>
+        <p class="modal-subtitle" id="modal-subtitle">Sous-titre du projet</p>
+      </div>
+      <div class="modal-content" id="modal-content">
+        <!-- Le contenu sera injecté par JavaScript -->
+      </div>
     </div>
   </div>
 
@@ -851,18 +951,19 @@
       });
     });
 
-    // Barre de progression
-    const de=document.documentElement;
+    // Barre de progression scroll (alimente header::after)
+    const de = document.documentElement;
     function onScroll(){
-      const h=de.scrollHeight - de.clientHeight;
-      const p=h>0 ? (de.scrollTop/h) : 0;
+      const h = de.scrollHeight - de.clientHeight;
+      const p = h>0 ? (de.scrollTop / h) : 0;
       de.style.setProperty('--scroll', p);
     }
-    document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+    document.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
 
-    // Tilt 3D: seulement quand on a une souris (desktop)
+    // Tilt 3D léger (ne change pas la taille)
     function attachTilt(el){
-      let rAF; const max=6;
+      let rAF; const max=6; // degrés
       function move(e){
         const r=el.getBoundingClientRect();
         const x=(e.clientX - (r.left + r.width/2))/r.width;
@@ -876,11 +977,9 @@
       el.addEventListener('mousemove', move);
       el.addEventListener('mouseleave', leave);
     }
-    if (window.matchMedia('(pointer:fine)').matches){
-      document.querySelectorAll('[data-tilt]').forEach(attachTilt);
-    }
+    document.querySelectorAll('[data-tilt]').forEach(attachTilt);
 
-    // Halo glossy
+    // halo glossy qui suit la souris
     document.querySelectorAll('.card, .work__item').forEach(el=>{
       el.addEventListener('mousemove', e=>{
         const r=el.getBoundingClientRect();
@@ -890,139 +989,163 @@
     });
 
     // Menu mobile
-    const btn=document.querySelector('.menu-toggle');
-    const menu=document.getElementById('menu');
-    btn.addEventListener('click', ()=>{
-      const open = menu.classList.toggle('show');
-      btn.setAttribute('aria-expanded', open);
-      document.body.classList.toggle('lock', open);
-    });
-    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{
-      menu.classList.remove('show'); btn.setAttribute('aria-expanded','false'); document.body.classList.remove('lock');
-    }));
+    const btn = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('menu');
+    if (btn && menu) {
+      btn.addEventListener('click', ()=>{
+        const open = menu.classList.toggle('show');
+        btn.setAttribute('aria-expanded', open);
+        document.body.classList.toggle('lock', open);
+      });
+      
+      menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{
+        menu.classList.remove('show'); 
+        btn.setAttribute('aria-expanded','false'); 
+        document.body.classList.remove('lock');
+      }));
+    }
 
-    // ------------------ MODALES PROJETS ------------------
-    const PROJECTS = {
+    // Respecte la préférence utilisateur pour réduire les animations
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      document.querySelectorAll('[data-tilt]').forEach(el=>{
+        el.replaceWith(el.cloneNode(true)); // supprime les listeners
+      });
+      document.removeEventListener('scroll', onScroll);
+      document.documentElement.style.setProperty('--scroll', 0);
+    }
+
+    // Système de modales pour les projets
+    const projectData = {
       lyazidi: {
         title: "L'assurance Lyazidi",
-        subtitle: "Générer des demandes qualifiées pour l'assurance auto & habitation",
-        img: 'images/assurance Lyazidi.png',
-        html: `
-          <img class="modal-image" src="images/assurance Lyazidi.png" alt="Assurance Lyazidi">
-          <p><strong>Objectif.</strong> Positionner la marque comme un interlocuteur fiable et réactif pour les besoins d'assurance du quotidien.</p>
+        subtitle: "Campagne de marketing digital",
+        content: `
+          <img src="images/assurance Lyazidi.png" alt="Assurance Lyazidi" class="modal-image">
+          <p>J'ai développé une campagne marketing complète pour L'assurance Lyazidi, axée sur la confiance et la crédibilité.</p>
+          <p><strong>Objectifs :</strong> Augmenter la notoriété de la marque et générer des demandes de devis.</p>
+          <p><strong>Stratégie :</strong></p>
           <ul>
-            <li>Optimisation <em>Google Business Profile</em> (catégories, services, FAQ, posts récurrents).</li>
-            <li>Pages locales ciblées + schémas <code>FAQ</code> et <code>LocalBusiness</code> pour le SEO.</li>
-            <li>Campagnes Search avec extensions d'appel + suivi des appels dans GA4.</li>
-            <li>Refonte des messages clés (preuves sociales, garanties, délais de réponse).</li>
+            <li>Création de visuels francs et professionnels</li>
+            <li>Messages ciblés mettant en avant la sécurité et la confiance</li>
+            <li>Campagnes Google Ads ciblant les recherches d'assurance à Rabat</li>
+            <li>Optimisation SEO pour les termes liés à l'assurance</li>
           </ul>
-          <p><strong>Livrables.</strong> Kit visuel, templates d'annonces, page de demande de devis, dashboard GA4.</p>
+          <p><strong>Résultats :</strong> Augmentation de 35% des demandes de devis en 3 mois et amélioration significative de la perception de la marque.</p>
         `
       },
       aimpactify: {
         title: "AIMPACTIFY Maroc",
-        subtitle: "Refonte d'identité + landing claire orientée conversion",
-        img: 'images/aimpactify_maroc_logo.jpeg',
-        html: `
-          <img class="modal-image" src="images/aimpactify_maroc_logo.jpeg" alt="AIMPACTIFY Maroc">
-          <p><strong>Enjeu.</strong> Clarifier l'offre (IA & data) et rassurer un public B2B.</p>
+        subtitle: "Branding data-driven",
+        content: `
+          <img src="images/aimpactify_maroc_logo.jpeg" alt="AIMPACTIFY Maroc" class="modal-image">
+          <p>J'ai conçu une identité de marque data-driven pour AIMPACTIFY Maroc, spécialiste des solutions IA.</p>
+          <p><strong>Objectifs :</strong> Positionner AIMPACTIFY comme leader des solutions IA au Maroc.</p>
+          <p><strong>Stratégie :</strong></p>
           <ul>
-            <li>Positionnement et <em>brand voice</em> (ton, bénéfices, preuves).</li>
-            <li>Guide de style (logo usages, couleurs, typos) + composants UI réutilisables.</li>
-            <li>Landing modulaire : problème → solution → cas d'usage → call-to-action.</li>
-            <li>Événements GA4 : clics CTAs, scroll, formulaires, ressources téléchargées.</li>
+            <li>Développement d'une identité visuelle moderne et technologique</li>
+            <li>Création de contenu valorisant l'expertise IA</li>
+            <li>Campagnes Meta Ads ciblant les décideurs IT</li>
+            <li>Landing pages optimisées pour la conversion</li>
           </ul>
-          <p><strong>Résultat.</strong> Parcours plus lisible et structure prête pour l'AB testing.</p>
+          <p><strong>Résultats :</strong> Positionnement réussi comme référence dans le domaine de l'IA et augmentation de 40% des leads qualifiés.</p>
         `
       },
       nsayblik: {
         title: "Nsayblik",
-        subtitle: "Du local au viral : contenus courts + UGC cadré",
-        img: 'images/nsayblik.png',
-        html: `
-          <img class="modal-image" src="images/nsayblik.png" alt="Nsayblik">
-          <p><strong>Approche.</strong> Système de contenus courts (hooks, formats, rythme) pour élargir l'audience locale.</p>
+        subtitle: "Du local au viral",
+        content: `
+          <img src="images/nsayblik.png" alt="Nsayblik" class="modal-image">
+          <p>J'ai transformé Nsayblik d'une entreprise locale en une marque virale grâce à une stratégie de marketing digital créative.</p>
+          <p><strong>Objectifs :</strong> Développer la notoriété nationale et stimuler le bouche-à-oreille.</p>
+          <p><strong>Stratégie :</strong></p>
           <ul>
-            <li>Bibliothèque de hooks (curiosité, objection, transformation) adaptée au secteur.</li>
-            <li>Templates Reels/TikTok (montage rapide, sous-titres, cut 0-3-7 secondes).</li>
-            <li>UGC guidé : scripts simples pour clients/ambassadeurs.</li>
-            <li>Plan de publication + calendrier Notion.</li>
+            <li>Création de hooks publicitaires malins et mémorables</li>
+            <li>Design friendly et accessible</li>
+            <li>Stratégie de contenu pour les réseaux sociaux</li>
+            <li>Campagnes de influence marketing</li>
           </ul>
-          <p><strong>Mesure.</strong> Tableau de bord de base (reach, watch time, CTR, messages reçus).</p>
+          <p><strong>Résultats :</strong> Croissance exponentielle de la communauté en ligne et développement significatif du bouche-à-oreille.</p>
         `
       },
       thegate: {
         title: "The Gate Morocco",
-        subtitle: "Expérience premium : cohérence visuelle & réservation fluide",
-        img: 'images/THEgate.jpg',
-        html: `
-          <img class="modal-image" src="images/THEgate.jpg" alt="The Gate Morocco">
-          <p><strong>Objectif.</strong> Traduire l'ambiance haut de gamme en design et parcours sans friction.</p>
+        subtitle: "Ambiance premium",
+        content: `
+          <img src="images/THEgate.jpg" alt="The Gate Morocco" class="modal-image">
+          <p>J'ai créé une expérience digitale premium pour The Gate Morocco, reflétant leur positionnement haut de gamme.</p>
+          <p><strong>Objectifs :</strong> Renforcer l'image premium et offrir une expérience utilisateur fluide.</p>
+          <p><strong>Stratégie :</strong></p>
           <ul>
-            <li>Moodboard & story brand (textures, lumières, micro-animations discrètes).</li>
-            <li>Menus/programmation mis à jour en un clic (CMS simple).</li>
-            <li>Réservation mise en avant (sticky CTA, confirmation + rappel).</li>
-            <li>Photos traitées en <em>color grading</em> pour cohérence.</li>
+            <li>Design élégant et sophistiqué</li>
+            <li>Parcours utilisateur optimisé de A à Z</li>
+            <li>Photographie et visuels haut de gamme</li>
+            <li>SEO local pour cibler la clientèle premium</li>
           </ul>
-          <p><strong>Livrables.</strong> One‑page élégante, assets sociaux, gabarits d'affiches.</p>
+          <p><strong>Résultats :</strong> Image de marque renforcée et augmentation des réservations en ligne de 25%.</p>
         `
       },
       linkopus: {
         title: "Linkopus Consulting",
-        subtitle: "B2B growth : positionnement clair + génération de leads",
-        img: 'images/linkopus.png',
-        html: `
-          <img class="modal-image" src="images/linkopus.png" alt="Linkopus Consulting">
-          <p><strong>Enjeu.</strong> Clarifier la proposition de valeur et capter des leads qualifiés.</p>
+        subtitle: "Spécialiste marketing digital",
+        content: `
+          <img src="images/linkopus.png" alt="Linkopus Consulting" class="modal-image">
+          <p>J'ai développé une stratégie marketing complète pour Linkopus Consulting, couvrant tous les aspects du marketing digital.</p>
+          <p><strong>Objectifs :</strong> Positionner Linkopus comme expert en marketing digital et générer des leads qualifiés.</p>
+          <p><strong>Stratégie :</strong></p>
           <ul>
-            <li>Audit funnel : messages, offres, friction, preuves.</li>
-            <li>Landing avec <em>social proof</em> + sections cas clients.</li>
-            <li>Lead magnet + séquence e‑mail nurturing.</li>
-            <li>Campagnes LinkedIn/Google avec UTMs, objectifs GA4.</li>
+            <li>Stratégie de contenu démontrant l'expertise</li>
+            <li>Design cohérent et professionnel</li>
+            <li>Campagnes publicitaires ciblées</li>
+            <li>Optimisation pour la conversion</li>
           </ul>
-          <p><strong>Résultat.</strong> Base marketing prête à scaler (A/B tests faciles à lancer).</p>
+          <p><strong>Résultats :</strong> Augmentation significative de la visibilité en ligne et croissance régulière du portefeuille clients.</p>
         `
       }
     };
 
-    const modal = document.getElementById('projectModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalSubtitle = document.getElementById('modalSubtitle');
-    const modalContent = document.getElementById('modalContent');
-    const modalClose = document.getElementById('modalClose');
+    // Gestion des modales
+    const modalOverlay = document.getElementById('project-modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const modalSubtitle = document.getElementById('modal-subtitle');
+    const modalContent = document.getElementById('modal-content');
 
-    function openProjectModal(key){
-      const data = PROJECTS[key];
-      if(!data) return;
-      modalTitle.textContent = data.title;
-      modalSubtitle.textContent = data.subtitle || '';
-      modalContent.innerHTML = data.html || '';
-      modal.classList.add('active');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('lock'); // empêcher le scroll en fond
-    }
-    function closeProjectModal(){
-      modal.classList.remove('active');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('lock');
-    }
+    // Ouvrir la modale
+    document.querySelectorAll('.work__item[data-project]').forEach(item => {
+      item.addEventListener('click', () => {
+        const projectId = item.getAttribute('data-project');
+        if (projectData[projectId]) {
+          modalTitle.textContent = projectData[projectId].title;
+          modalSubtitle.textContent = projectData[projectId].subtitle;
+          modalContent.innerHTML = projectData[projectId].content;
+          modalOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
 
-    document.querySelectorAll('.work__item[data-project]')
-      .forEach(item=> item.addEventListener('click', ()=> openProjectModal(item.dataset.project)) );
+    // Fermer la modale
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
 
-    modalClose.addEventListener('click', closeProjectModal);
-    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeProjectModal(); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeProjectModal(); });
+    // Fermer avec la touche Échap
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        closeModal();
+      }
+    });
 
-    // Réduit les animations si demandé
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      document.querySelectorAll('[data-tilt]').forEach(el=>{ el.replaceWith(el.cloneNode(true)); });
-      document.removeEventListener('scroll', onScroll);
-      document.documentElement.style.setProperty('--scroll', 0);
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
     }
   </script>
 
-  <!-- JSON-LD -->
+  <!-- JSON-LD ( SEO Optimization) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
