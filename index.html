@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root{
       --bg:#0b0f14;
@@ -265,7 +266,9 @@
     .grid{ display:grid; gap:18px }
     .grid--3{ grid-template-columns: 1fr }
     .grid--2{ grid-template-columns: 1fr }
-    .card{ 
+    
+    /* Styles pour les cartes de services interactives */
+    .service-card { 
       background:var(--card); 
       border:1px solid rgba(255,255,255,.06); 
       border-radius:var(--radius); 
@@ -274,14 +277,76 @@
       position:relative; 
       overflow:hidden;
       max-width: 100%;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .card:hover{ border-color: rgba(255,122,0,.30) }
+    .service-card:hover { 
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+      border-color: rgba(255,122,0,.30);
+    }
+    .service-card.active { 
+      border-color: rgba(255,122,0,.50);
+    }
     .card__icon{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background: radial-gradient(circle at 30% 20%, #ffb347, #ff7a00 80%); box-shadow: inset 0 0 10px rgba(255,255,255,.14) }
     .card h3{ margin:.8rem 0 .4rem }
     .card p{ color:var(--muted) }
+    
+    /* Détails des services */
+    .service-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      background: rgba(15, 20, 27, 0.7);
+      margin-top: 15px;
+      border-radius: 12px;
+    }
+    
+    .service-details-content {
+      padding: 20px;
+    }
+    
+    .service-card.active .service-details {
+      max-height: 500px;
+    }
+    
+    .service-feature {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    
+    .feature-icon {
+      color: var(--brand);
+      margin-right: 10px;
+      font-size: 18px;
+      margin-top: 4px;
+    }
+    
+    .obtain-service-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      box-shadow: 0 5px 15px rgba(255, 122, 0, 0.3);
+    }
+    
+    .obtain-service-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 122, 0, 0.4);
+    }
+    
     /* halo qui suit la souris */
-    .card::after, .work__item::after{ content:""; position:absolute; inset:0; border-radius:inherit; background: radial-gradient(600px 200px at var(--mx, 50%) var(--my, 0%), rgba(255,122,0,.08), transparent 40%); opacity:0; transition:opacity .2s; pointer-events:none }
-    .card:hover::after, .work__item:hover::after{ opacity:1 }
+    .service-card::after, .work__item::after{ content:""; position:absolute; inset:0; border-radius:inherit; background: radial-gradient(600px 200px at var(--mx, 50%) var(--my, 0%), rgba(255,122,0,.08), transparent 40%); opacity:0; transition:opacity .2s; pointer-events:none }
+    .service-card:hover::after, .work__item:hover::after{ opacity:1 }
 
     /* Projects */
     .work{ 
@@ -592,6 +657,7 @@
       h1,
       .lead {
         text-align: left;
+        justify-content: flex-start;
       }
       .hero__cta{ justify-content: flex-start; }
       .foot{ flex-direction: row; }
@@ -636,6 +702,19 @@
       .modal {
         transition: none;
       }
+    }
+    
+    /* Indication que le message a été pré-rempli */
+    .service-preselected {
+      animation: pulse 2s ease-in-out;
+      border-color: rgba(255, 122, 0, 0.5) !important;
+      box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.2) !important;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(255, 122, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0); }
     }
   </style>
 </head>
@@ -696,28 +775,142 @@
         </div>
 
         <div class="grid grid--3">
-          <article class="card" data-animate>
+          <!-- Service 1 -->
+          <article class="service-card" data-animate>
             <div class="card__icon">📈</div>
             <h3>SEO Optimization</h3>
             <p>Audit technique, contenu optimisé et Google Business Profile pour capter les recherches locales.</p>
+            <div class="service-details">
+              <div class="service-details-content">
+                <p>Notre service de SEO Optimization comprend:</p>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Audit technique complet</h4>
+                    <p>Analyse approfondie de votre site pour identifier les problèmes techniques qui affectent votre classement.</p>
+                  </div>
+                </div>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Optimisation de contenu</h4>
+                    <p>Création et optimisation de contenu stratégique pour améliorer votre visibilité.</p>
+                  </div>
+                </div>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Gestion Google Business Profile</h4>
+                    <p>Optimisation de votre profil pour attirer plus de clients locaux.</p>
+                  </div>
+                </div>
+                <button class="obtain-service-btn" data-service="SEO Optimization">Obtenir ce service</button>
+              </div>
+            </div>
           </article>
-          <article class="card" data-animate>
+          
+          <!-- Service 2 -->
+          <article class="service-card" data-animate>
             <div class="card__icon">🎯</div>
             <h3>Meta & Google Ads</h3>
             <p>Campagnes rentables avec A/B tests et suivi précis de chaque dirham investi.</p>
+            <div class="service-details">
+              <div class="service-details-content">
+                <p>Notre service Meta & Google Ads comprend:</p>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Stratégie de campagnes</h4>
+                    <p>Développement de stratégies publicitaires sur mesure pour vos objectifs.</p>
+                  </div>
+                </div>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>A/B Testing</h4>
+                    <p>Tests continus pour optimiser les performances de vos annonces.</p>
+                  </div>
+                </div>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Suivi précis des investissements</h4>
+                    <p>Analyse détaillée du ROI pour chaque dirham investi.</p>
+                  </div>
+                </div>
+                <button class="obtain-service-btn" data-service="Meta & Google Ads">Obtenir ce service</button>
+              </div>
+            </div>
           </article>
-          <article class="card" data-animate>
+          
+          <!-- Service 3 -->
+          <article class="service-card" data-animate>
             <div class="card__icon">🎬</div>
             <h3>Editor Video</h3>
             <p>Reels/TikTok/Shorts qui arrêtent le scroll et boostent le taux de clic.</p>
+            <div class="service-details">
+              <div class="service-details-content">
+                <p>Notre service Editor Video comprend:</p>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Création de contenu engageant</h4>
+                    <p>Production de vidéos conçues pour captiver votre audience.</p>
+                  </div>
+                </div>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Optimisation pour les réseaux sociaux</h4>
+                    <p>Formatage spécifique pour Reels, TikTok, Shorts et autres plateformes.</p>
+                  </div>
+                </div>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Stratégie de viralité</h4>
+                    <p>Techniques pour augmenter le partage et l'engagement de vos vidéos.</p>
+                  </div>
+                </div>
+                <button class="obtain-service-btn" data-service="Editor Video">Obtenir ce service</button>
+              </div>
+            </div>
           </article>
         </div>
 
         <div class="grid grid--2" style="margin-top:18px">
-          <article class="card" data-animate>
+          <!-- Service 4 -->
+          <article class="service-card" data-animate>
             <div class="card__icon">🧪</div>
             <h3>Landing Pages & GA4</h3>
             <p>Pages qui convertissent + tracking clair (GA4) pour piloter la performance.</p>
+            <div class="service-details">
+              <div class="service-details-content">
+                <p>Notre service Landing Pages & GA4 comprend:</p>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Conception de landing pages</h4>
+                    <p>Création de pages optimisées pour maximiser les conversions.</p>
+                  </div>
+                </div>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Intégration GA4</h4>
+                    <p>Configuration complète du suivi Google Analytics 4.</p>
+                  </div>
+                </div>
+                <div class="service-feature">
+                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>
+                    <h4>Analyse de performance</h4>
+                    <p>Reporting détaillé et recommandations d'optimisation.</p>
+                  </div>
+                </div>
+                <button class="obtain-service-btn" data-service="Landing Pages & GA4">Obtenir ce service</button>
+              </div>
+            </div>
           </article>
         </div>
       </div>
@@ -884,11 +1077,24 @@
         </div>
 
         <div class="contact">
-          <form name="contact" netlify>
+          <form name="contact" netlify id="contact-form">
             <input type="hidden" name="form-name" value="contact" />
-            <div class="field"><label for="name">Nom</label><input id="name" name="name" placeholder="Votre nom" required /></div>
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" value="elkissiimad9@gmail.com" required /></div>
-            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Parlez-moi de votre projet"></textarea></div>
+            <div class="field">
+              <label for="name">Nom</label>
+              <input id="name" name="name" placeholder="Votre nom" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="Votre email" required />
+            </div>
+            <div class="field">
+              <label for="service">Service</label>
+              <input id="service" name="service" placeholder="Service demandé" />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Parlez-moi de votre projet" required></textarea>
+            </div>
             <button class="btn" type="submit">Envoyer</button>
             <p style="color:var(--muted); font-size:.92rem; margin-top:10px">✉️ Ou écrivez directement : <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a></p>
           </form>
@@ -980,7 +1186,7 @@
     document.querySelectorAll('[data-tilt]').forEach(attachTilt);
 
     // halo glossy qui suit la souris
-    document.querySelectorAll('.card, .work__item').forEach(el=>{
+    document.querySelectorAll('.service-card, .work__item').forEach(el=>{
       el.addEventListener('mousemove', e=>{
         const r=el.getBoundingClientRect();
         el.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100).toFixed(2)+'%');
@@ -1134,7 +1340,7 @@
 
     // Fermer avec la touche Échap
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+      if (e.key === 'Eescape' && modalOverlay.classList.contains('active')) {
         closeModal();
       }
     });
@@ -1143,6 +1349,59 @@
       modalOverlay.classList.remove('active');
       document.body.style.overflow = 'auto';
     }
+
+    // Gestion des services interactifs
+    const serviceCards = document.querySelectorAll('.service-card');
+    const serviceInput = document.getElementById('service');
+    const messageInput = document.getElementById('message');
+    const contactForm = document.getElementById('contact-form');
+    const obtainServiceBtns = document.querySelectorAll('.obtain-service-btn');
+
+    // Gestion des clics sur les cartes de service
+    serviceCards.forEach(card => {
+      card.addEventListener('click', function(e) {
+        // Ne pas fermer la carte si on clique sur le bouton "Obtenir ce service"
+        if (e.target.classList.contains('obtain-service-btn')) {
+          return;
+        }
+        
+        // Fermer les autres cartes ouvertes
+        serviceCards.forEach(otherCard => {
+          if (otherCard !== card && otherCard.classList.contains('active')) {
+            otherCard.classList.remove('active');
+          }
+        });
+        
+        // Ouvrir/fermer la carte cliquée
+        card.classList.toggle('active');
+      });
+    });
+
+    // Gestion du bouton "Obtenir ce service"
+    obtainServiceBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Empêcher la propagation du clic à la carte parente
+        const serviceName = this.getAttribute('data-service');
+        
+        // Pré-remplir le formulaire de contact
+        serviceInput.value = serviceName;
+        messageInput.value = `Bonjour, je suis intéressé par votre service "${serviceName}". Pouvez-vous me fournir plus d'informations ?`;
+        
+        // Fermer toutes les cartes de service ouvertes
+        serviceCards.forEach(card => {
+          card.classList.remove('active');
+        });
+        
+        // Faire défiler jusqu'à la section contact
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        
+        // Animation pour indiquer que le formulaire a été pré-rempli
+        contactForm.classList.add('service-preselected');
+        setTimeout(() => {
+          contactForm.classList.remove('service-preselected');
+        }, 2000);
+      });
+    });
   </script>
 
   <!-- JSON-LD ( SEO Optimization) -->
