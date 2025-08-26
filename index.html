@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root{
       --bg:#0b0f14;
@@ -266,9 +265,7 @@
     .grid{ display:grid; gap:18px }
     .grid--3{ grid-template-columns: 1fr }
     .grid--2{ grid-template-columns: 1fr }
-    
-    /* Styles pour les cartes de services interactives */
-    .service-card { 
+    .card{ 
       background:var(--card); 
       border:1px solid rgba(255,255,255,.06); 
       border-radius:var(--radius); 
@@ -280,73 +277,17 @@
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .service-card:hover { 
+    .card:hover{ 
+      border-color: rgba(255,122,0,.30);
       transform: translateY(-5px);
       box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-      border-color: rgba(255,122,0,.30);
-    }
-    .service-card.active { 
-      border-color: rgba(255,122,0,.50);
     }
     .card__icon{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background: radial-gradient(circle at 30% 20%, #ffb347, #ff7a00 80%); box-shadow: inset 0 0 10px rgba(255,255,255,.14) }
     .card h3{ margin:.8rem 0 .4rem }
     .card p{ color:var(--muted) }
-    
-    /* Détails des services */
-    .service-details {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-      background: rgba(15, 20, 27, 0.7);
-      margin-top: 15px;
-      border-radius: 12px;
-    }
-    
-    .service-details-content {
-      padding: 20px;
-    }
-    
-    .service-card.active .service-details {
-      max-height: 500px;
-    }
-    
-    .service-feature {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-    
-    .feature-icon {
-      color: var(--brand);
-      margin-right: 10px;
-      font-size: 18px;
-      margin-top: 4px;
-    }
-    
-    .obtain-service-btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      background: linear-gradient(90deg, var(--brand), var(--brand-2));
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 20px;
-      box-shadow: 0 5px 15px rgba(255, 122, 0, 0.3);
-    }
-    
-    .obtain-service-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255, 122, 0, 0.4);
-    }
-    
     /* halo qui suit la souris */
-    .service-card::after, .work__item::after{ content:""; position:absolute; inset:0; border-radius:inherit; background: radial-gradient(600px 200px at var(--mx, 50%) var(--my, 0%), rgba(255,122,0,.08), transparent 40%); opacity:0; transition:opacity .2s; pointer-events:none }
-    .service-card:hover::after, .work__item:hover::after{ opacity:1 }
+    .card::after, .work__item::after{ content:""; position:absolute; inset:0; border-radius:inherit; background: radial-gradient(600px 200px at var(--mx, 50%) var(--my, 0%), rgba(255,122,0,.08), transparent 40%); opacity:0; transition:opacity .2s; pointer-events:none }
+    .card:hover::after, .work__item:hover::after{ opacity:1 }
 
     /* Projects */
     .work{ 
@@ -635,6 +576,20 @@
     .modal-content li {
       margin-bottom: 8px;
     }
+
+    /* Bouton Obtenir service */
+    .service-btn {
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      background: linear-gradient(180deg, rgba(255,122,0,.25), rgba(255,122,0,.18));
+      box-shadow: 0 6px 16px rgba(255,122,0,0.2), inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+
+    /* Contact Modal */
+    .contact-modal {
+      max-width: 600px;
+    }
     
     /* ---------- Responsive ---------- */
     /* Tablettes */
@@ -657,7 +612,6 @@
       h1,
       .lead {
         text-align: left;
-        justify-content: flex-start;
       }
       .hero__cta{ justify-content: flex-start; }
       .foot{ flex-direction: row; }
@@ -702,19 +656,6 @@
       .modal {
         transition: none;
       }
-    }
-    
-    /* Indication que le message a été pré-rempli */
-    .service-preselected {
-      animation: pulse 2s ease-in-out;
-      border-color: rgba(255, 122, 0, 0.5) !important;
-      box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.2) !important;
-    }
-    
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(255, 122, 0, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0); }
     }
   </style>
 </head>
@@ -775,142 +716,28 @@
         </div>
 
         <div class="grid grid--3">
-          <!-- Service 1 -->
-          <article class="service-card" data-animate>
+          <article class="card" data-animate data-service="seo">
             <div class="card__icon">📈</div>
             <h3>SEO Optimization</h3>
             <p>Audit technique, contenu optimisé et Google Business Profile pour capter les recherches locales.</p>
-            <div class="service-details">
-              <div class="service-details-content">
-                <p>Notre service de SEO Optimization comprend:</p>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Audit technique complet</h4>
-                    <p>Analyse approfondie de votre site pour identifier les problèmes techniques qui affectent votre classement.</p>
-                  </div>
-                </div>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Optimisation de contenu</h4>
-                    <p>Création et optimisation de contenu stratégique pour améliorer votre visibilité.</p>
-                  </div>
-                </div>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Gestion Google Business Profile</h4>
-                    <p>Optimisation de votre profil pour attirer plus de clients locaux.</p>
-                  </div>
-                </div>
-                <button class="obtain-service-btn" data-service="SEO Optimization">Obtenir ce service</button>
-              </div>
-            </div>
           </article>
-          
-          <!-- Service 2 -->
-          <article class="service-card" data-animate>
+          <article class="card" data-animate data-service="ads">
             <div class="card__icon">🎯</div>
             <h3>Meta & Google Ads</h3>
             <p>Campagnes rentables avec A/B tests et suivi précis de chaque dirham investi.</p>
-            <div class="service-details">
-              <div class="service-details-content">
-                <p>Notre service Meta & Google Ads comprend:</p>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Stratégie de campagnes</h4>
-                    <p>Développement de stratégies publicitaires sur mesure pour vos objectifs.</p>
-                  </div>
-                </div>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>A/B Testing</h4>
-                    <p>Tests continus pour optimiser les performances de vos annonces.</p>
-                  </div>
-                </div>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Suivi précis des investissements</h4>
-                    <p>Analyse détaillée du ROI pour chaque dirham investi.</p>
-                  </div>
-                </div>
-                <button class="obtain-service-btn" data-service="Meta & Google Ads">Obtenir ce service</button>
-              </div>
-            </div>
           </article>
-          
-          <!-- Service 3 -->
-          <article class="service-card" data-animate>
+          <article class="card" data-animate data-service="video">
             <div class="card__icon">🎬</div>
             <h3>Editor Video</h3>
             <p>Reels/TikTok/Shorts qui arrêtent le scroll et boostent le taux de clic.</p>
-            <div class="service-details">
-              <div class="service-details-content">
-                <p>Notre service Editor Video comprend:</p>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Création de contenu engageant</h4>
-                    <p>Production de vidéos conçues pour captiver votre audience.</p>
-                  </div>
-                </div>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Optimisation pour les réseaux sociaux</h4>
-                    <p>Formatage spécifique pour Reels, TikTok, Shorts et autres plateformes.</p>
-                  </div>
-                </div>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Stratégie de viralité</h4>
-                    <p>Techniques pour augmenter le partage et l'engagement de vos vidéos.</p>
-                  </div>
-                </div>
-                <button class="obtain-service-btn" data-service="Editor Video">Obtenir ce service</button>
-              </div>
-            </div>
           </article>
         </div>
 
         <div class="grid grid--2" style="margin-top:18px">
-          <!-- Service 4 -->
-          <article class="service-card" data-animate>
+          <article class="card" data-animate data-service="landing">
             <div class="card__icon">🧪</div>
             <h3>Landing Pages & GA4</h3>
             <p>Pages qui convertissent + tracking clair (GA4) pour piloter la performance.</p>
-            <div class="service-details">
-              <div class="service-details-content">
-                <p>Notre service Landing Pages & GA4 comprend:</p>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Conception de landing pages</h4>
-                    <p>Création de pages optimisées pour maximiser les conversions.</p>
-                  </div>
-                </div>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Intégration GA4</h4>
-                    <p>Configuration complète du suivi Google Analytics 4.</p>
-                  </div>
-                </div>
-                <div class="service-feature">
-                  <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                  <div>
-                    <h4>Analyse de performance</h4>
-                    <p>Reporting détaillé et recommandations d'optimisation.</p>
-                  </div>
-                </div>
-                <button class="obtain-service-btn" data-service="Landing Pages & GA4">Obtenir ce service</button>
-              </div>
-            </div>
           </article>
         </div>
       </div>
@@ -1077,24 +904,12 @@
         </div>
 
         <div class="contact">
-          <form name="contact" netlify id="contact-form">
+          <form name="contact" netlify>
             <input type="hidden" name="form-name" value="contact" />
-            <div class="field">
-              <label for="name">Nom</label>
-              <input id="name" name="name" placeholder="Votre nom" required />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="Votre email" required />
-            </div>
-            <div class="field">
-              <label for="service">Service</label>
-              <input id="service" name="service" placeholder="Service demandé" />
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Parlez-moi de votre projet" required></textarea>
-            </div>
+            <div class="field"><label for="name">Nom</label><input id="name" name="name" placeholder="Votre nom" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="Votre email" required /></div>
+            <div class="field"><label for="subject">Sujet</label><input id="subject" name="subject" placeholder="Sujet de votre demande" /></div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Parlez-moi de votre projet"></textarea></div>
             <button class="btn" type="submit">Envoyer</button>
             <p style="color:var(--muted); font-size:.92rem; margin-top:10px">✉️ Ou écrivez directement : <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a></p>
           </form>
@@ -1134,6 +949,42 @@
       </div>
       <div class="modal-content" id="modal-content">
         <!-- Le contenu sera injecté par JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale pour les services -->
+  <div class="modal-overlay" id="service-modal">
+    <div class="modal">
+      <button class="modal-close" id="service-modal-close">&times;</button>
+      <div class="modal-header">
+        <h2 class="modal-title" id="service-modal-title">Titre du service</h2>
+        <p class="modal-subtitle" id="service-modal-subtitle">Sous-titre du service</p>
+      </div>
+      <div class="modal-content" id="service-modal-content">
+        <!-- Le contenu sera injecté par JavaScript -->
+      </div>
+      <button class="btn service-btn" id="service-modal-btn">Obtenir ce service</button>
+    </div>
+  </div>
+
+  <!-- Modale de contact -->
+  <div class="modal-overlay" id="contact-modal">
+    <div class="modal contact-modal">
+      <button class="modal-close" id="contact-modal-close">&times;</button>
+      <div class="modal-header">
+        <h2 class="modal-title">Contactez-moi</h2>
+        <p class="modal-subtitle">Pour discuter de votre projet</p>
+      </div>
+      <div class="modal-content">
+        <form name="contact-modal" netlify>
+          <input type="hidden" name="form-name" value="contact-modal" />
+          <div class="field"><label for="modal-name">Nom</label><input id="modal-name" name="name" placeholder="Votre nom" required /></div>
+          <div class="field"><label for="modal-email">Email</label><input id="modal-email" name="email" type="email" placeholder="Votre email" required /></div>
+          <div class="field"><label for="modal-subject">Sujet</label><input id="modal-subject" name="subject" placeholder="Sujet de votre demande" /></div>
+          <div class="field"><label for="modal-message">Message</label><textarea id="modal-message" name="message" placeholder="Parlez-moi de votre projet"></textarea></div>
+          <button class="btn" type="submit">Envoyer</button>
+        </form>
       </div>
     </div>
   </div>
@@ -1186,7 +1037,7 @@
     document.querySelectorAll('[data-tilt]').forEach(attachTilt);
 
     // halo glossy qui suit la souris
-    document.querySelectorAll('.service-card, .work__item').forEach(el=>{
+    document.querySelectorAll('.card, .work__item').forEach(el=>{
       el.addEventListener('mousemove', e=>{
         const r=el.getBoundingClientRect();
         el.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100).toFixed(2)+'%');
@@ -1218,6 +1069,156 @@
       });
       document.removeEventListener('scroll', onScroll);
       document.documentElement.style.setProperty('--scroll', 0);
+    }
+
+    // Données des services
+    const serviceData = {
+      seo: {
+        title: "SEO Optimization",
+        subtitle: "Augmentez votre visibilité en ligne",
+        content: `
+          <p>Je propose des services complets d'optimisation pour les moteurs de recherche (SEO) adaptés aux entreprises marocaines.</p>
+          
+          <p><strong>Ce que j'offre :</strong></p>
+          <ul>
+            <li>Audit technique complet de votre site web</li>
+            <li>Optimisation du contenu pour les mots-clés pertinents</li>
+            <li>Configuration et optimisation de Google Business Profile</li>
+            <li>Stratégie de référencement local pour cibler Rabat et le Maroc</li>
+            <li>Suivi des performances avec Google Analytics 4</li>
+            <li>Rapports mensuels détaillés sur l'évolution du trafic</li>
+          </ul>
+          
+          <p><strong>Résultats attendus :</strong></p>
+          <ul>
+            <li>Augmentation du trafic organique de 30 à 100% en 6 mois</li>
+            <li>Meilleur positionnement sur les mots-clés stratégiques</li>
+            <li>Augmentation des demandes de devis et contacts</li>
+            <li>Amélioration de l'expérience utilisateur</li>
+          </ul>
+          
+          <p>Je travaille avec des outils professionnels pour analyser et optimiser chaque aspect technique et sémantique de votre présence en ligne.</p>
+        `
+      },
+      ads: {
+        title: "Meta & Google Ads",
+        subtitle: "Campagnes publicitaires performantes",
+        content: `
+          <p>Je crée et gère des campagnes publicitaires rentables sur Meta (Facebook/Instagram) et Google Ads pour générer des leads qualifiés.</p>
+          
+          <p><strong>Ce que j'offre :</strong></p>
+          <ul>
+            <li>Stratégie publicitaire personnalisée selon votre secteur</li>
+            <li>Création de campagnes A/B test pour optimiser les performances</li>
+            <li>Suivi précis du ROI de chaque dirham investi</li>
+            <li>Publicités ciblées pour le marché marocain</li>
+            <li>Création de audiences personnalisées et retargeting</li>
+            <li>Optimisation continue basée sur les données de performance</li>
+          </ul>
+          
+          <p><strong>Résultats attendus :</strong></p>
+          <ul>
+            <li>Coût par acquisition réduit de 20 à 40%</li>
+            <li>Augmentation du taux de conversion</li>
+            <li>Meilleure segmentation de votre audience cible</li>
+            <li>Suivi transparent de toutes les dépenses publicitaires</li>
+          </ul>
+          
+          <p>Je m'assure que chaque campagne est optimisée pour maximiser votre retour sur investissement et atteindre vos objectifs business.</p>
+        `
+      },
+      video: {
+        title: "Editor Video",
+        subtitle: "Contenu vidéo engageant pour les réseaux sociaux",
+        content: `
+          <p>Je crée des vidéos percutantes optimisées pour les plateformes sociales (Reels, TikTok, Shorts) qui captent l'attention et génèrent de l'engagement.</p>
+          
+          <p><strong>Ce que j'offre :</strong></p>
+          <ul>
+            <li>Montage vidéo professionnel pour Reels, TikTok et YouTube Shorts</li>
+            <li>Création de contenu adapté à l'audience marocaine</li>
+            <li>Optimisation pour arrêter le scroll et booster le taux de clic</li>
+            <li>Ajout de sous-titres et textes animés pour une meilleure accessibilité</li>
+            <li>Stratégie de contenu vidéo cohérente avec votre branding</li>
+            <li>Analyse des performances et ajustements continus</li>
+          </ul>
+          
+          <p><strong>Résultats attendus :</strong></p>
+          <ul>
+            <li>Augmentation de l'engagement sur vos réseaux sociaux</li>
+            <li>Croissance organique de votre audience</li>
+            <li>Amélioration du taux de conversion</li>
+            <li>Contenu viral qui augmente la notoriété de votre marque</li>
+          </ul>
+          
+          <p>Je combine créativité et stratégie pour produire des vidéos qui non seulement attirent l'attention mais convertissent aussi les viewers en clients.</p>
+        `
+      },
+      landing: {
+        title: "Landing Pages & GA4",
+        subtitle: "Pages convertissantes et analyse de données",
+        content: `
+          <p>Je conçois des landing pages optimisées pour la conversion et configure le tracking GA4 pour mesurer précisément vos performances.</p>
+          
+          <p><strong>Ce que j'offre :</strong></p>
+          <ul>
+            <li>Design de landing pages responsive et convaincantes</li>
+            <li>Optimisation pour maximiser les taux de conversion</li>
+            <li>Intégration de formulaires et calls-to-action stratégiques</li>
+            <li>Configuration complète de Google Analytics 4</li>
+            <li>Suivi des événements et conversions importantes</li>
+            <li>Tableaux de bord personnalisés pour suivre vos KPIs</li>
+          </ul>
+          
+          <p><strong>Résultats attendus :</strong></p>
+          <ul>
+            <li>Taux de conversion augmenté de 25 à 70%</li>
+            <li>Meilleure compréhension du comportement des visiteurs</li>
+            <li>Données précises pour prendre des décisions éclairées</li>
+            <li>Optimisation continue basée sur les données recueillies</li>
+          </ul>
+          
+          <p>Je m'assure que chaque visite compte et que vous avez toutes les données nécessaires pour piloter votre croissance.</p>
+        `
+      }
+    };
+
+    // Système de modales pour les services
+    const serviceModal = document.getElementById('service-modal');
+    const serviceModalClose = document.getElementById('service-modal-close');
+    const serviceModalTitle = document.getElementById('service-modal-title');
+    const serviceModalSubtitle = document.getElementById('service-modal-subtitle');
+    const serviceModalContent = document.getElementById('service-modal-content');
+    const serviceModalBtn = document.getElementById('service-modal-btn');
+
+    let currentService = null;
+
+    // Ouvrir la modale de service
+    document.querySelectorAll('.card[data-service]').forEach(card => {
+      card.addEventListener('click', () => {
+        const serviceId = card.getAttribute('data-service');
+        if (serviceData[serviceId]) {
+          currentService = serviceId;
+          serviceModalTitle.textContent = serviceData[serviceId].title;
+          serviceModalSubtitle.textContent = serviceData[serviceId].subtitle;
+          serviceModalContent.innerHTML = serviceData[serviceId].content;
+          serviceModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    // Fermer la modale de service
+    serviceModalClose.addEventListener('click', closeServiceModal);
+    serviceModal.addEventListener('click', (e) => {
+      if (e.target === serviceModal) {
+        closeServiceModal();
+      }
+    });
+
+    function closeServiceModal() {
+      serviceModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
     }
 
     // Système de modales pour les projets
@@ -1309,14 +1310,14 @@
       }
     };
 
-    // Gestion des modales
+    // Gestion des modales de projets
     const modalOverlay = document.getElementById('project-modal');
     const modalClose = document.getElementById('modal-close');
     const modalTitle = document.getElementById('modal-title');
     const modalSubtitle = document.getElementById('modal-subtitle');
     const modalContent = document.getElementById('modal-content');
 
-    // Ouvrir la modale
+    // Ouvrir la modale de projet
     document.querySelectorAll('.work__item[data-project]').forEach(item => {
       item.addEventListener('click', () => {
         const projectId = item.getAttribute('data-project');
@@ -1330,17 +1331,10 @@
       });
     });
 
-    // Fermer la modale
+    // Fermer la modale de projet
     modalClose.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', (e) => {
       if (e.target === modalOverlay) {
-        closeModal();
-      }
-    });
-
-    // Fermer avec la touche Échap
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Eescape' && modalOverlay.classList.contains('active')) {
         closeModal();
       }
     });
@@ -1350,57 +1344,42 @@
       document.body.style.overflow = 'auto';
     }
 
-    // Gestion des services interactifs
-    const serviceCards = document.querySelectorAll('.service-card');
-    const serviceInput = document.getElementById('service');
-    const messageInput = document.getElementById('message');
-    const contactForm = document.getElementById('contact-form');
-    const obtainServiceBtns = document.querySelectorAll('.obtain-service-btn');
+    // Gestion de la modale de contact
+    const contactModal = document.getElementById('contact-modal');
+    const contactModalClose = document.getElementById('contact-modal-close');
 
-    // Gestion des clics sur les cartes de service
-    serviceCards.forEach(card => {
-      card.addEventListener('click', function(e) {
-        // Ne pas fermer la carte si on clique sur le bouton "Obtenir ce service"
-        if (e.target.classList.contains('obtain-service-btn')) {
-          return;
-        }
-        
-        // Fermer les autres cartes ouvertes
-        serviceCards.forEach(otherCard => {
-          if (otherCard !== card && otherCard.classList.contains('active')) {
-            otherCard.classList.remove('active');
-          }
-        });
-        
-        // Ouvrir/fermer la carte cliquée
-        card.classList.toggle('active');
-      });
+    // Ouvrir la modale de contact depuis le bouton de service
+    serviceModalBtn.addEventListener('click', () => {
+      closeServiceModal();
+      contactModal.classList.add('active');
+      
+      // Pré-remplir le sujet avec le service sélectionné
+      const subjectField = document.getElementById('modal-subject');
+      if (subjectField && currentService && serviceData[currentService]) {
+        subjectField.value = `Demande de service: ${serviceData[currentService].title}`;
+      }
     });
 
-    // Gestion du bouton "Obtenir ce service"
-    obtainServiceBtns.forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation(); // Empêcher la propagation du clic à la carte parente
-        const serviceName = this.getAttribute('data-service');
-        
-        // Pré-remplir le formulaire de contact
-        serviceInput.value = serviceName;
-        messageInput.value = `Bonjour, je suis intéressé par votre service "${serviceName}". Pouvez-vous me fournir plus d'informations ?`;
-        
-        // Fermer toutes les cartes de service ouvertes
-        serviceCards.forEach(card => {
-          card.classList.remove('active');
-        });
-        
-        // Faire défiler jusqu'à la section contact
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        
-        // Animation pour indiquer que le formulaire a été pré-rempli
-        contactForm.classList.add('service-preselected');
-        setTimeout(() => {
-          contactForm.classList.remove('service-preselected');
-        }, 2000);
-      });
+    // Fermer la modale de contact
+    contactModalClose.addEventListener('click', closeContactModal);
+    contactModal.addEventListener('click', (e) => {
+      if (e.target === contactModal) {
+        closeContactModal();
+      }
+    });
+
+    function closeContactModal() {
+      contactModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Fermer avec la touche Échap
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (modalOverlay.classList.contains('active')) closeModal();
+        if (serviceModal.classList.contains('active')) closeServiceModal();
+        if (contactModal.classList.contains('active')) closeContactModal();
+      }
     });
   </script>
 
