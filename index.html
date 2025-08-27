@@ -929,30 +929,15 @@
         </div>
 
         <div class="contact">
-  <form id="contact-form" action="https://formspree.io/f/TON_ID_FORM" method="POST">
-    <div class="field">
-      <label for="name">Nom</label>
-      <input id="name" name="name" placeholder="Votre nom" required />
-    </div>
-    <div class="field">
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" placeholder="Votre email" required />
-    </div>
-    <div class="field">
-      <label for="subject">Sujet</label>
-      <input id="subject" name="subject" placeholder="Sujet de votre demande" />
-    </div>
-    <div class="field">
-      <label for="message">Message</label>
-      <textarea id="message" name="message" placeholder="Parlez-moi de votre projet"></textarea>
-    </div>
-    <button class="btn" type="submit">Envoyer</button>
-    <p id="form-status" style="color:var(--muted); font-size:.92rem; margin-top:10px">
-      ✉️ Ou écrivez directement :
-      <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a>
-    </p>
-  </form>
-</div>
+          <form name="contact" netlify id="contact-form">
+            <input type="hidden" name="form-name" value="contact" />
+            <div class="field"><label for="name">Nom</label><input id="name" name="name" placeholder="Votre nom" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="Votre email" required /></div>
+            <div class="field"><label for="subject">Sujet</label><input id="subject" name="subject" placeholder="Sujet de votre demande" /></div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Parlez-moi de votre projet"></textarea></div>
+            <button class="btn" type="submit">Envoyer</button>
+            <p style="color:var(--muted); font-size:.92rem; margin-top:10px">✉️ Ou écrivez directement : <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a></p>
+          </form>
 
           <div class="card" data-animate>
             <h3>Infos rapides</h3>
