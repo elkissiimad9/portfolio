@@ -929,16 +929,39 @@
         </div>
 
         <div class="contact">
-          <form name="contact" netlify id="contact-form">
-            <input type="hidden" name="form-name" value="contact" />
-            <div class="field"><label for="name">Nom</label><input id="name" name="name" placeholder="Votre nom" required /></div>
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="Votre email" required /></div>
-            <div class="field"><label for="subject">Sujet</label><input id="subject" name="subject" placeholder="Sujet de votre demande" /></div>
-            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Parlez-moi de votre projet"></textarea></div>
-            <button class="btn" type="submit">Envoyer</button>
-            <p style="color:var(--muted); font-size:.92rem; margin-top:10px">✉️ Ou écrivez directement : <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a></p>
-          </form>
+  <form id="contact-form" action="https://formspree.io/f/mgvlvvna" method="POST">
+    <div class="field">
+      <label for="name">Nom</label>
+      <input id="name" name="name" placeholder="Votre nom" required />
+    </div>
 
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="Votre email" required />
+    </div>
+
+    <div class="field">
+      <label for="subject">Sujet</label>
+      <input id="subject" name="subject" placeholder="Sujet de votre demande" />
+    </div>
+
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Parlez-moi de votre projet" required></textarea>
+    </div>
+
+    <button class="btn" type="submit">Envoyer</button>
+
+    <!-- Message de confirmation -->
+    <p id="form-message" style="display:none; color:var(--txt); font-size:.92rem; margin-top:10px;"></p>
+
+    <!-- Email direct -->
+    <p style="color:var(--muted); font-size:.92rem; margin-top:10px">
+      ✉️ Ou écrivez directement :
+      <a href="mailto:elkissiimad9@gmail.com" style="color:var(--txt)">elkissiimad9@gmail.com</a>
+    </p>
+  </form>
+</div>
           <div class="card" data-animate>
             <h3>Infos rapides</h3>
             <p class="section__desc">Basé au Maroc • Disponible en remote • Facturation pro</p>
@@ -1487,4 +1510,33 @@
   }
   </script>
 </body>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contact-form");
+  const messageBox = document.getElementById("form-message");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // Empêche le rechargement de la page
+
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" }
+    });
+
+    if (response.ok) {
+      // Succès
+      messageBox.style.display = "block";
+      messageBox.style.color = "#00ff95";
+      messageBox.innerText = "🎉 Merci pour votre demande ! Nous vous répondrons sous 24h.";
+      form.reset();
+    } else {
+      // Erreur
+      messageBox.style.display = "block";
+      messageBox.style.color = "#ff4d4d";
+      messageBox.innerText = "❌ Une erreur est survenue. Veuillez réessayer.";
+    }
+  });
+});
+</script>
 </html>
