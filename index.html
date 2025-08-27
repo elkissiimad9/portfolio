@@ -591,6 +591,31 @@
       max-width: 600px;
     }
     
+    /* Message de remerciement */
+    .thank-you-message {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    
+    .thank-you-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: var(--brand);
+    }
+    
+    .thank-you-title {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--brand);
+    }
+    
+    .thank-you-text {
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+    
     /* ---------- Responsive ---------- */
     /* Tablettes */
     @media (min-width: 768px) {
@@ -904,7 +929,7 @@
         </div>
 
         <div class="contact">
-          <form name="contact" netlify>
+          <form name="contact" netlify id="contact-form">
             <input type="hidden" name="form-name" value="contact" />
             <div class="field"><label for="name">Nom</label><input id="name" name="name" placeholder="Votre nom" required /></div>
             <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="Votre email" required /></div>
@@ -977,7 +1002,7 @@
         <p class="modal-subtitle">Pour discuter de votre projet</p>
       </div>
       <div class="modal-content">
-        <form name="contact-modal" netlify>
+        <form name="contact-modal" netlify id="modal-contact-form">
           <input type="hidden" name="form-name" value="contact-modal" />
           <div class="field"><label for="modal-name">Nom</label><input id="modal-name" name="name" placeholder="Votre nom" required /></div>
           <div class="field"><label for="modal-email">Email</label><input id="modal-email" name="email" type="email" placeholder="Votre email" required /></div>
@@ -985,6 +1010,20 @@
           <div class="field"><label for="modal-message">Message</label><textarea id="modal-message" name="message" placeholder="Parlez-moi de votre projet"></textarea></div>
           <button class="btn" type="submit">Envoyer</button>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale de remerciement -->
+  <div class="modal-overlay" id="thankyou-modal">
+    <div class="modal">
+      <button class="modal-close" id="thankyou-modal-close">&times;</button>
+      <div class="thank-you-message">
+        <div class="thank-you-icon">✅</div>
+        <h2 class="thank-you-title">Merci pour votre demande !</h2>
+        <p class="thank-you-text">Nous avons bien reçu votre demande de service et nous vous contacterons dès que possible.</p>
+        <p class="thank-you-text">En attendant, n'hésitez pas à explorer mes autres services ou à me contacter directement par WhatsApp pour une réponse plus rapide.</p>
+        <a class="btn" href="https://wa.me/212618593795" target="_blank" rel="noopener">Me contacter sur WhatsApp</a>
       </div>
     </div>
   </div>
@@ -1124,7 +1163,7 @@
             <li>Suivi transparent de toutes les dépenses publicitaires</li>
           </ul>
           
-          <p>Je m'assure que chaque campagne est optimisée pour maximiser votre retour sur investissement et atteindre vos objectifs business.</p>
+ <p>Je m'assure que chaque campagne est optimisée pour maximiser votre retour sur investissement et atteindre vos objectifs business.</p>
         `
       },
       video: {
@@ -1373,12 +1412,63 @@
       document.body.style.overflow = 'auto';
     }
 
+    // Gestion de la modale de remerciement
+    const thankyouModal = document.getElementById('thankyou-modal');
+    const thankyouModalClose = document.getElementById('thankyou-modal-close');
+
+    // Fermer la modale de remerciement
+    thankyouModalClose.addEventListener('click', closeThankyouModal);
+    thankyouModal.addEventListener('click', (e) => {
+      if (e.target === thankyouModal) {
+        closeThankyouModal();
+      }
+    });
+
+    function closeThankyouModal() {
+      thankyouModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Gestion de la soumission des formulaires
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Simuler l'envoi du formulaire (dans un cas réel, cela serait géré par Netlify)
+      setTimeout(() => {
+        // Fermer la modale de contact si elle est ouverte
+        closeContactModal();
+        
+        // Afficher le message de remerciement
+        thankyouModal.classList.add('active');
+        
+        // Réinitialiser le formulaire
+        this.reset();
+      }, 1000);
+    });
+
+    document.getElementById('modal-contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Simuler l'envoi du formulaire (dans un cas réel, cela serait géré par Netlify)
+      setTimeout(() => {
+        // Fermer la modale de contact si elle est ouverte
+        closeContactModal();
+        
+        // Afficher le message de remerciement
+        thankyouModal.classList.add('active');
+        
+        // Réinitialiser le formulaire
+        this.reset();
+      }, 1000);
+    });
+
     // Fermer avec la touche Échap
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         if (modalOverlay.classList.contains('active')) closeModal();
         if (serviceModal.classList.contains('active')) closeServiceModal();
         if (contactModal.classList.contains('active')) closeContactModal();
+        if (thankyouModal.classList.contains('active')) closeThankyouModal();
       }
     });
   </script>
