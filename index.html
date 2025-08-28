@@ -909,7 +909,7 @@
             <div class="person"><div class="avatar"></div><div><strong>CEO</strong><div class="muted">The Gate Morocco</div></div></div>
           </div>
 
-          <div class="quote__card" data-animate>
+            <div class="quote__card" data-animate>
             <div class="stars">★★★★★</div>
             <blockquote>« Stratégie, contenu, ads : on booste vraiment les résultats. »</blockquote>
             <div class="person"><div class="avatar"></div><div><strong>Founder & CEO</strong><div class="muted">Linkopus Consulting</div></div></div>
@@ -929,8 +929,8 @@
         </div>
 
         <div class="contact">
-          <form name="contact" netlify id="contact-form">
-            <input type="hidden" name="form-name" value="contact" />
+          <!-- Formulaire avec action Formspree -->
+          <form action="https://formspree.io/f/mgvlvwna" method="POST" id="contact-form">
             <div class="field"><label for="name">Nom</label><input id="name" name="name" placeholder="Votre nom" required /></div>
             <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="Votre email" required /></div>
             <div class="field"><label for="subject">Sujet</label><input id="subject" name="subject" placeholder="Sujet de votre demande" /></div>
@@ -1002,8 +1002,8 @@
         <p class="modal-subtitle">Pour discuter de votre projet</p>
       </div>
       <div class="modal-content">
-        <form name="contact-modal" netlify id="modal-contact-form">
-          <input type="hidden" name="form-name" value="contact-modal" />
+        <!-- Formulaire modal avec action Formspree -->
+        <form action="https://formspree.io/f/mgvlvwna" method="POST" id="modal-contact-form">
           <div class="field"><label for="modal-name">Nom</label><input id="modal-name" name="name" placeholder="Votre nom" required /></div>
           <div class="field"><label for="modal-email">Email</label><input id="modal-email" name="email" type="email" placeholder="Votre email" required /></div>
           <div class="field"><label for="modal-subject">Sujet</label><input id="modal-subject" name="subject" placeholder="Sujet de votre demande" /></div>
@@ -1163,7 +1163,7 @@
             <li>Suivi transparent de toutes les dépenses publicitaires</li>
           </ul>
           
- <p>Je m'assure que chaque campagne est optimisée pour maximiser votre retour sur investissement et atteindre vos objectifs business.</p>
+          <p>Je m'assure que chaque campagne est optimisée pour maximiser votre retour sur investissement et atteindre vos objectifs business.</p>
         `
       },
       video: {
@@ -1354,7 +1354,7 @@
     const modalClose = document.getElementById('modal-close');
     const modalTitle = document.getElementById('modal-title');
     const modalSubtitle = document.getElementById('modal-subtitle');
-    const modalContent = document.getElementById('modal-content');
+    const modalContent = document.getElementById('modal-content");
 
     // Ouvrir la modale de projet
     document.querySelectorAll('.work__item[data-project]').forEach(item => {
@@ -1431,13 +1431,9 @@
 
     // Gestion de la soumission des formulaires
     document.getElementById('contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Simuler l'envoi du formulaire (dans un cas réel, cela serait géré par Netlify)
+      // Laisser Formspree gérer la soumission
+      // Afficher le message de remerciement après un délai
       setTimeout(() => {
-        // Fermer la modale de contact si elle est ouverte
-        closeContactModal();
-        
         // Afficher le message de remerciement
         thankyouModal.classList.add('active');
         
@@ -1447,11 +1443,10 @@
     });
 
     document.getElementById('modal-contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Simuler l'envoi du formulaire (dans un cas réel, cela serait géré par Netlify)
+      // Laisser Formspree gérer la soumission
+      // Afficher le message de remerciement après un délai
       setTimeout(() => {
-        // Fermer la modale de contact si elle est ouverte
+        // Fermer la modale de contact
         closeContactModal();
         
         // Afficher le message de remerciement
